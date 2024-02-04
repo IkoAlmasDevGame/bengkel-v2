@@ -1,0 +1,164 @@
+.wrapper {
+    display: flex;
+    width: 100%;
+}
+
+#sidebar {
+    width: 250px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    z-index: 999;
+    color: #fff;
+    transition: all 0.3s;
+}
+
+#sidebar.active {
+    margin-left: -250px;
+}
+
+#sidebar .sidebar-header {
+    padding: 11px 20px 10px 20px;
+    background: white;
+}
+
+#sidebar ul.components {
+    border-bottom: 1px solid #47748b;
+}
+
+#sidebar ul p {
+    color: #fff;
+    padding: 10px;
+}
+
+#sidebar ul li a {
+    padding: 10px;
+    font-size: 1.1em;
+    display: block;
+}
+
+#sidebar ul li a:hover {
+    color: black;
+}
+
+#sidebar ul li.active>a,
+a[aria-expanded="true"] {
+    color: black;
+}
+
+a[data-toggle="collapse"] {
+    position: relative;
+}
+
+.dropdown-toggle::after {
+    display: block;
+    position: absolute;
+    top: 50%;
+    right: 20px;
+    transform: translateY(-50%);
+}
+
+ul ul a {
+    font-size: 0.9em !important;
+    padding-left: 30px !important;
+}
+
+.menu-text {
+   color:white;
+   font-size: 24px;
+   font-weight: bold;
+   position: relative;
+   top: 10px;
+   left:5px;
+}
+
+
+.menu-btn {
+    background:#0092D1;
+    margin-top: 10px;
+    color: white;
+}
+
+.menu-header {
+    width:100%;
+    height:64px;
+    background: #0092D1;
+}
+
+
+
+
+/* ---------------------------------------------------
+    CONTENT STYLE
+----------------------------------------------------- */
+
+#content {
+    width: calc(100% - 250px);
+    min-height: 100vh;
+    transition: all 0.3s;
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+#content .active {
+    width: 100%;
+}
+
+/* ---------------------------------------------------
+    MEDIAQUERIES
+----------------------------------------------------- */
+
+@media (max-width: 768px) {
+    #sidebar {
+        margin-left: -250px;
+    }
+    #sidebar.active {
+        margin-left: 0;
+    }
+    #content {
+        width: 100%;
+    }
+    #content.active {
+        width: calc(100% - 250px);
+    }  
+}
+
+/* 
+    MEDIA SIDEBAR
+*/
+
+@media (max-width: 768px){
+    #sidebar a, .dropdown {
+        padding: 6px 8px 6px 16px;
+        text-decoration: none;
+        font-size: 16px;
+        color: #818181;
+        display: block;
+        border: none;
+        background: none;
+        width: 100%;
+        text-align: left;
+        cursor: pointer;
+        outline: none;
+    }
+    
+    #sidebar a:hover, .dropdown:hover {
+        color: #f1f1f1;
+    }
+    
+    .dropdown-menu {
+        display: none;
+        background-color: #262626;
+        padding-left: 8px;
+    }
+
+    .fa-caret-down > .dropdown:hover, .dropdown-menu:hover {
+        transition: 5000ms ease-in-out;
+    }
+    
+    #sidebar .show {
+        display: block;
+    }
+}
