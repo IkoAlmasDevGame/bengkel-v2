@@ -4,79 +4,17 @@
 <head>
     <?php 
     require_once("../database/koneksi.php");
-        
-    switch (connection_status()){
-        case CONNECTION_NORMAL:
-          $txt = 'Connection is in a normal state';
-          break;
-        case CONNECTION_ABORTED:
-          $txt = 'Connection aborted';
-          break;
-        case CONNECTION_TIMEOUT:
-          $txt = 'Connection timed out';
-          break;
-        case (CONNECTION_ABORTED & CONNECTION_TIMEOUT):
-          $txt = 'Connection aborted and timed out';
-          break;
-        default:
-          $txt = 'Unknown';
-          break;
-        
-        if(isset($_GET["act"])){
-            if($_GET["act"]=="register"){
-                
-                if(isset($_POST["submited"])){
-                    $table3 = "";
-                    $table4 = "";
-                    
-                    $sql_register = "INSERT INTO $table3 () VALUES ()";
-                    $row_register = $conn->query($sql_register);
-                    $conn->query("INSERT INTO $table4 () VALUES ()");
-                    $responses["db_account"] = array();
-                    $responsess["db_profile"] = array();
-                    if($row_register){
-                        array_push($responses["db_account"], $responses);
-                        array_push($responsess["db_profile"], $responsess);
-                        echo $txt;
-                        header("location:index.php");
-                        exit(0);
-                    }else{
-                        header("location:index.php");
-                        echo $txt;
-                        exit(0); 
-                    }
-                }
-                
-                if($_GET["act"]=="login"){
-                    if(isset($_POST["submit"])){
-                        $table2 = "";
-                        
-                        $sql_login = "";
-                        $row_login = $conn->query($sql_login);
-                        $cek = mysqli_num_rows($row_login);
 
-                        if($cek > 1){
-                            $response["account"] = array();
-                            if($db = $row->fetch_assoc()){
-                                
-                            }
-                        }
-                    }
-                }                
-            }
-        }  
-    }
-
-        $table = "db_sistem";
-        $sql = "SELECT * FROM $table WHERE flags = '1'";
-        $row = $conn->query($sql);
-        $hasil = $row->fetch_assoc();
-        // Data Perusahaan
-        $_SESSION["perusahaan"] = $hasil["nama_perusahaan"];
-        $_SESSION["jenis_perusahaan"] = $hasil["jenis"];
-        $_SESSION["alamat_perusahaan"] = $hasil["alamat"];
-        $_SESSION["hari"] = $hasil["hari_operasional"];
-        $_SESSION["jam"] = $hasil["jam_operasional"];
+    $table = "db_sistem";
+    $sql = "SELECT * FROM $table WHERE flags = '1'";
+    $row = $conn->query($sql);
+    $hasil = $row->fetch_assoc();
+    // Data Perusahaan
+    $_SESSION["perusahaan"] = $hasil["nama_perusahaan"];
+    $_SESSION["jenis_perusahaan"] = $hasil["jenis"];
+    $_SESSION["alamat_perusahaan"] = $hasil["alamat"];
+    $_SESSION["hari"] = $hasil["hari_operasional"];
+    $_SESSION["jam"] = $hasil["jam_operasional"];
     ?>
     <meta charset="UTF-8">
     <meta content='text/html; charset=iso-8859-1' http-equiv='Content-type' />
@@ -332,14 +270,137 @@
         <div class="container-md container-lg mt-5 pt-5 opacity-75">
             <div class="modal-dialog">
                 <div class="modal-content">
-                    <div class="modal-header"></div>
+                    <div class="modal-header">
+                        <h3 class="fs-4 display-4 text-start">Login account</h3>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
                     <div class="modal-body">
-                        <form action="index.php?act=login" method="post">
-
+                        <form action="act-signin.php" method="post">
+                            <table class="table table-striped">
+                                <div class="card-group">
+                                    <tr>
+                                        <td class="fs-5">Username / Email</td>
+                                        <td>
+                                            <input type="text" name="userEmail" class="form-control"
+                                                placeholder="masukkan username / email anda" require>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="fs-5">Password</td>
+                                        <td>
+                                            <input type="password" name="password" class="form-control"
+                                                placeholder="masukkan password anda" require>
+                                        </td>
+                                    </tr>
+                                </div>
+                            </table>
+                            <div class="modal-footer d-flex justify-content-center align-items-center">
+                                <button type="submit" name="submits" class="btn btn-outline-dark">
+                                    <i class="fa fa-sign-in-alt"></i>
+                                    <span>Sign In</span>
+                                </button>
+                                <button type="reset" class="btn btn-outline-danger">
+                                    <i class="fa fa-eraser"></i>
+                                    <span>Reset</span>
+                                </button>
+                            </div>
                         </form>
-                        <div class="card-footer">
-
+                        <div class="modal-footer">
+                            <a href="" data-bs-target="#register" data-bs-toggle="modal" aria-controls="register"
+                                aria-expanded="false"
+                                class="btn btn-light btn-outline-dark text-decoration-none text-secondary"
+                                role="button">membuat akun baru</a>
                         </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="register" tabindex="-1" aria-hidden="false">
+        <div class="container-md container-lg mt-5 pt-5 opacity-75">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3 class="fs-4 display-4 text-start">akun baru</h3>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="act-signup.php" method="post">
+                            <table class="table table-striped">
+                                <div class="card-group">
+                                    <tr>
+                                        <td class="fs-5">Email</td>
+                                        <td>
+                                            <input type="email" name="email" class="form-control"
+                                                placeholder="masukkan email anda" require>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="fs-5">Username</td>
+                                        <td>
+                                            <input type="text" name="username" class="form-control"
+                                                placeholder="masukkan username anda" require>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="fs-5">Password</td>
+                                        <td>
+                                            <input type="password" name="password" class="form-control"
+                                                placeholder="masukkan password anda" require>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="fs-5">Nama</td>
+                                        <td>
+                                            <input type="text" name="nama" class="form-control"
+                                                placeholder="masukkan nama anda" require>
+                                        </td>
+                                    </tr>
+                                    <tr hidden>
+                                        <td class="fs-5">Jabatan</td>
+                                        <td>
+                                            <input type="text" name="user_level" value="konsumen" class="form-control"
+                                                placeholder="masukkan jabatan anda" require readonly>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="fs-5">Alamat Rumah</td>
+                                        <td>
+                                            <input type="text" name="alamat" class="form-control"
+                                                placeholder="masukkan alamat rumah anda" require>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="fs-5">Tanggal Lahir</td>
+                                        <td>
+                                            <input type="date" name="tanggal_lahir" class="form-control"
+                                                placeholder="masukkan tanggal lahir anda" require>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="fs-5">Telepon</td>
+                                        <td>
+                                            <input type="number" name="telepon" class="form-control"
+                                                placeholder="masukkan telepon anda" require>
+                                        </td>
+                                    </tr>
+                                </div>
+                            </table>
+                            <div class="modal-footer d-flex justify-content-center align-items-center">
+                                <button type="submit" name="submited" class="btn btn-outline-dark">
+                                    <i class="fa fa-save"></i>
+                                    <span>Simpan</span>
+                                </button>
+                                <button type="button" data-bs-dismiss="modal" class="btn btn-outline-dark">
+                                    <span>Cancel</span>
+                                </button>
+                                <button type="reset" class="btn btn-outline-danger">
+                                    <i class="fa fa-eraser"></i>
+                                    <span>Reset</span>
+                                </button>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>

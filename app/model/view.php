@@ -1,9 +1,7 @@
 <?php 
 namespace model;
 
-use koneksi;
-
-class view {
+class View {
     protected $db;
     public function __construct($db)
     {
