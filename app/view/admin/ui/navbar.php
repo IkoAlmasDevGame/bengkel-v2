@@ -38,13 +38,13 @@ if($_SESSION["user_level"] == "admin"){
                                 </a>
                                 <ul class="dropdown-menu">
                                     <li>
-                                        <a href="../barang/index.php" class="dropdown-item nav-link">
+                                        <a href="../ui/header.php?page=barang" class="dropdown-item nav-link">
                                             <span class="fas fa-cubes"></span>
                                             <span>Data Barang</span>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="../kategori/index.php" class="dropdown-item nav-link">
+                                        <a href="../ui/header.php?page=kategori" class="dropdown-item nav-link">
                                             <span class="fas fa-cube"></span>
                                             <span>Data Kategori</span>
                                         </a>
@@ -72,7 +72,7 @@ if($_SESSION["user_level"] == "admin"){
                         <li class="nav-item mx-3">
                             <a href="" class="btn btn-outline-light">
                                 <span class="fas fa-envelope"></span>
-                                <span class="fs-5">Kontak Masuk</span>
+                                <span class="fs-5">Kotak Masuk</span>
                             </a>
                         </li>
                         <li class="nav-item mx-3">
@@ -132,15 +132,15 @@ if($_SESSION["user_level"] == "admin"){
                     </ul>
                 </div>
 
-                <div class="ms-auto text-white fs-5">
+                <div class="ms-auto mx-5 text-white fs-5">
                     <div class="dropdown">
                         <a href="" role="button" class="btn dropdown-toggle text-white" data-bs-toggle="dropdown"
                             aria-expanded="false">
-                            <?php echo ucwords(ucfirst($_SESSION["email"])); ?>
+                            <?php echo ucwords(ucfirst($_SESSION["email_pengguna"])); ?>
                         </a>
                         <ul class="dropdown-menu">
                             <li class="dropdown-item bg-light text-black">
-                                <?php echo "Nama : ".ucwords(ucfirst($_SESSION["nama"])) ?>
+                                <?php echo "Nama : ".ucwords(ucfirst($_SESSION["nama_pengguna"])) ?>
                             </li>
                             <li class="dropdown-item bg-light text-black">
                                 <?php echo "Jabatan : ".ucwords(ucfirst($_SESSION["user_level"])) ?>

@@ -10,7 +10,8 @@ if(isset($_POST["submited"])){
         header("location:index.php");
     }
 
-    $sql = "SELECT * FROM db_pengguna WHERE email = '$userEmail' and password='$passEmail' || username = '$userEmail' and password='$passEmail'";
+    $sql = "SELECT * FROM db_pengguna WHERE email = '$userEmail' and password='$passEmail' || 
+    username = '$userEmail' and password='$passEmail'";
     $row = $conn->query($sql);
 
     if($row->num_rows > 0){
@@ -18,9 +19,9 @@ if(isset($_POST["submited"])){
         if($db = $row->fetch_assoc()){
             if($db["user_level"]== "admin"){
                 $_SESSION["id"] = $db["id"];
-                $_SESSION["email"] = $db["email"];
+                $_SESSION["email_pengguna"] = $db["email"];
                 $_SESSION["username"] = $db["username"];
-                $_SESSION["nama"] = $db["nama"];
+                $_SESSION["nama_pengguna"] = $db["nama"];
                 $_SESSION["user_level"] = "admin";
                 header("location:dashboard/index.php");
             }

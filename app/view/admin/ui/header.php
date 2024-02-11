@@ -31,6 +31,55 @@
             exit(0);
         }
     }
+
+    if(!isset($_GET["act"])){
+    }else{
+        switch ($_GET["act"]) {
+            // Barang
+            case 'simpan-barang':
+                header("location:header.php?page=barang");
+                break;
+            case 'edit-barang':
+                header("location:header.php?page=barang");
+                break;
+            case 'hapus-barang':
+                header("location:header.php?page=barang");
+                break;
+            // Kategori
+            case 'simpan-kategori':
+                header("location:header.php?page=kategori");
+                break;
+            case 'edit-kategori':
+                header("location:header.php?page=kategori");
+                break;
+            case 'hapus-kategori':
+                header("location:header.php?page=kategori");
+                break;
+            //
+
+            default:
+                require_once("location:../dashboard/index.php");
+                break;
+        }
+    }
+
+    if(!isset($_GET["page"])){
+    }else{
+        switch ($_GET["page"]) {
+            case 'barang':
+                require_once("../barang/index.php");
+                break;
+
+            case 'kategori':
+                require_once("../kategori/index.php");
+                break;
+            
+            default:
+                require_once("location:../dashboard/index.php");
+                break;
+        }
+    }
+
     ?>
     <meta charset="UTF-8">
     <meta content='text/html; charset=iso-8859-1' http-equiv='Content-type' />
@@ -42,6 +91,7 @@
     <!--  -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/dataTables.bootstrap5.min.css">
     <link rel="stylesheet" href="../../../../dist/css/glyphicon.css">
 
     <style type="text/css">
