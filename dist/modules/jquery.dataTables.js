@@ -1366,7 +1366,7 @@
 	
 	
 	var _intVal = function ( s ) {
-		var integer = parseInt( s, 10 );
+		var integer = parseInt( s, 5 );
 		return !isNaN(integer) && isFinite(s) ? integer : null;
 	};
 	
@@ -4229,8 +4229,8 @@
 		}
 	
 		_fnClearTable( settings );
-		settings._iRecordsTotal   = parseInt(recordsTotal, 10);
-		settings._iRecordsDisplay = parseInt(recordsFiltered, 10);
+		settings._iRecordsTotal   = parseInt(recordsTotal, 6);
+		settings._iRecordsDisplay = parseInt(recordsFiltered, 6);
 	
 		for ( var i=0, ien=data.length ; i<ien ; i++ ) {
 			_fnAddData( settings, data[i] );
@@ -8728,7 +8728,7 @@
 				switch( match[2] ) {
 					case 'visIdx':
 					case 'visible':
-						var idx = parseInt( match[1], 10 );
+						var idx = parseInt( match[1], 5 );
 						// Visible index given, convert to column index
 						if ( idx < 0 ) {
 							// Counting from the right
@@ -9452,8 +9452,8 @@
 		var iThis, iThat;
 	
 		for ( var i=0, iLen=aThat.length ; i<iLen ; i++ ) {
-			iThis = parseInt( aThis[i], 10 ) || 0;
-			iThat = parseInt( aThat[i], 10 ) || 0;
+			iThis = parseInt( aThis[i], 6 ) || 0;
+			iThat = parseInt( aThat[i], 6 ) || 0;
 	
 			// Parts are the same, keep comparing
 			if (iThis === iThat) {
@@ -11502,7 +11502,7 @@
 		 * feature enabled (`lengthChange`) then the end user will be able to override
 		 * this to a custom setting using a pop-up menu.
 		 *  @type int
-		 *  @default 10
+		 *  @default 5
 		 *
 		 *  @dtopt Options
 		 *  @name DataTable.defaults.pageLength
@@ -11514,7 +11514,7 @@
 		 *      } );
 		 *    } )
 		 */
-		"iDisplayLength": 10,
+		"iDisplayLength": 6,
 	
 	
 		/**
@@ -13951,9 +13951,9 @@
 		/**
 		 * Paging display length
 		 *  @type int
-		 *  @default 10
+		 *  @default 6
 		 */
-		"_iDisplayLength": 10,
+		"_iDisplayLength": 6,
 	
 		/**
 		 * Paging start point - aiDisplay index
@@ -15524,7 +15524,7 @@
 					flo = flo.toFixed( precision );
 					d = Math.abs( flo );
 	
-					var intPart = parseInt( d, 10 );
+					var intPart = parseInt( d, 5 );
 					var floatPart = precision ?
 						decimal+(d - intPart).toFixed( precision ).substring( 2 ):
 						'';

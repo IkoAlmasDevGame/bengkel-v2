@@ -23,11 +23,11 @@ require_once("../ui/navbar.php");
                     </div>
                     <div class="card-footer">
                         <div class="card-header text-center bg-light">
-                            <h5 class="fw-normal"><?php echo (float)0; ?></h5>
+                            <h5 class="fw-normal">
+                                <?php $hasil = $lihat->BarangRow(); echo $hasil["jml"]; ?></h5>
                         </div>
                         <div class="text-end">
-                            <a href="#" role="button" class="btn fa fa-arrow-right"></a>
-                            <!-- <a href="../menu/barang/" role="button" class="btn fa fa-arrow-right"></a> -->
+                            <a href="../ui/header.php?page=barang" role="button" class="btn fa fa-arrow-right"></a>
                         </div>
                     </div>
                 </div>
@@ -40,11 +40,10 @@ require_once("../ui/navbar.php");
                     </div>
                     <div class="card-footer">
                         <div class="card-header text-center bg-light">
-                            <h5 class="fw-normal"><?php echo (float)0; ?></h5>
+                            <h5 class="fw-normal"><?php $hasil = $lihat->KategoriRow(); echo $hasil["jml"];; ?></h5>
                         </div>
                         <div class="text-end">
-                            <a href="#" role="button" class="btn fa fa-arrow-right"></a>
-                            <!-- <a href="../menu/kategori/" role="button" class="btn fa fa-arrow-right"></a> -->
+                            <a href="../ui/header.php?page=kategori" role="button" class="btn fa fa-arrow-right"></a>
                         </div>
                     </div>
                 </div>
@@ -58,6 +57,25 @@ require_once("../ui/navbar.php");
                     <div class="card-footer">
                         <div class="card-header text-center bg-light">
                             <h5 class="fw-normal"><?php echo (float)0; ?></h5>
+                        </div>
+                        <div class="text-end">
+                            <a href="#" role="button" class="btn fa fa-arrow-right"></a>
+                            <!-- <a href="../reservasi/" role="button" class="btn fa fa-arrow-right"></a> -->
+                        </div>
+                    </div>
+                </div>
+                <div class="card col-md-2 col-lg-2">
+                    <div class="card-body">
+                        <div class="card-header text-center">
+                            <h5 class="fa fa-money-bill-alt"></h5>
+                            <span class="mx-2">Keuangan</span>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <div class="card-header text-center bg-light">
+                            <h5 class="fw-normal">
+                                <?php $hasil = $lihat->KeuanganRow(); echo "Rp. ".number_format($hasil["jual"]).",-"; ?>
+                            </h5>
                         </div>
                         <div class="text-end">
                             <a href="#" role="button" class="btn fa fa-arrow-right"></a>

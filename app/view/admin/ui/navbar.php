@@ -129,6 +129,31 @@ if($_SESSION["user_level"] == "admin"){
                                 </ul>
                             </div>
                         </li>
+                        <li class="nav-item mx-2">
+                            <div class="dropdown">
+                                <a href="" role="button" class="btn btn-outline-light dropdown-toggle"
+                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                    <span class="fa fa-info-circle mx-1"></span>
+                                    <span class="fs-5">Info data barang</span>
+                                </a>
+                                <ul class="dropdown-menu" aria-hidden="true" tabindex="-1">
+                                    <li class="dropdown-item">
+                                        <?php 
+                                            $sql = "select * from db_barang where stok_sisa <= 3";
+                                            $row = $conn->query($sql);
+                                            $cek = mysqli_num_rows($row);
+                                            if($cek > '3'){
+                                                echo "
+                                                <span class='fas fa-info'></span> Ada <span style='color:red'>$cek</span>
+                                                barang yang Stok tersisa sudah kurang dari 3 items. silahkan isi stock barang lagi !!
+                                                <a href='../ui/header.php?page=barang&stok=yes' class='btn btn-outline-info nav-link active'>Cek Barang <i class='fas fa-angle-double-right'></i></a>
+                                                ";
+                                            }
+                                        ?>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
                     </ul>
                 </div>
 

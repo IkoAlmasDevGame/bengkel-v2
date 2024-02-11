@@ -37,22 +37,33 @@
         switch ($_GET["act"]) {
             // Barang
             case 'simpan-barang':
+                $lihat->BarangSimpan();
                 header("location:header.php?page=barang");
                 break;
             case 'edit-barang':
+                $lihat->BarangEditan();
+                header("location:header.php?page=barang");
+                break;
+            case 'restok-barang':
+                $lihat->restok();
                 header("location:header.php?page=barang");
                 break;
             case 'hapus-barang':
+                $lihat->BarangHapus();
                 header("location:header.php?page=barang");
                 break;
+
             // Kategori
             case 'simpan-kategori':
+                $lihat->KategoriSimpan();
                 header("location:header.php?page=kategori");
                 break;
             case 'edit-kategori':
+                $lihat->KategoriEditan();
                 header("location:header.php?page=kategori");
                 break;
             case 'hapus-kategori':
+                $lihat->KategoriHapus();
                 header("location:header.php?page=kategori");
                 break;
             //
@@ -69,7 +80,7 @@
             case 'barang':
                 require_once("../barang/index.php");
                 break;
-
+                
             case 'kategori':
                 require_once("../kategori/index.php");
                 break;
