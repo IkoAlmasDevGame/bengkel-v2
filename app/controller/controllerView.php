@@ -44,6 +44,17 @@ class Controller {
         return $hasil;
     }
 
+    public function RestokRow(){
+        $row = $this->sdb->rowRestok();
+        $hasil = $row->fetch_array();
+        return $hasil;
+    }
+    public function SisaRow(){
+        $row = $this->sdb->rowSisa();
+        $hasil = $row->fetch_array();
+        return $hasil;
+    }
+
     public function BarangSimpan(){
         $id_kategori = htmlspecialchars($_POST["kategori"]);
         $nama = htmlspecialchars($_POST["nama"]);
@@ -97,7 +108,7 @@ class Controller {
         if(in_array($ekstensi_foto, $ekstensi_diperbolehkan_foto) === true){
             if($ukuran_foto < 10440070){
                 move_uploaded_file($file_tmp_foto, "../../../../assets/inventory/" . $image);
-                $this->sdb->EditanBarang($id,$id_kategori,$nama,$merk,$beli,$jual,$stok,$stok_sisa,$satuan,$image,$tanggal);
+                $this->sdb->EditanBarang($id_kategori,$nama,$merk,$beli,$jual,$stok,$stok_sisa,$satuan,$image,$tanggal,$id);
             }else{
                 echo "GAGAL MENGUPLOAD FILE FOTO";
             }
@@ -115,7 +126,7 @@ class Controller {
         $id = htmlspecialchars($_POST["id_barang"]);
         $stok = htmlspecialchars($_POST["stok"]);
         $stok_sisa = htmlspecialchars($_POST["sisa"]);
-        $this->sdb->RestokBarang($id,$stok,$stok_sisa);
+        $this->sdb->RestokBarang($stok,$stok_sisa,$id);
     }
 
     /* Kategori */
@@ -136,7 +147,7 @@ class Controller {
     }
 
     public function KategoriEditan(){
-        $id_kategori = htmlspecialchars($_POST["id_kategori"]);
+        $id_kategori = htmlspecialchars($_POST["id"]);
         $kategori = htmlspecialchars($_POST["kategori"]);
         $this->sdb->EditanKategori($kategori,$id_kategori);
     }

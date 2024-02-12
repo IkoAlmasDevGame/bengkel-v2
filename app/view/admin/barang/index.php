@@ -45,7 +45,7 @@
                             foreach ($hasil as $isi) {
                     ?>
                     <div class="card col-sm-3 col-md-3 justify-content-start align-items-start"
-                        style="min-width: 24%; width:185px;">
+                        style="min-width: 25%; width:320px;">
                         <div class="card-header">
                             <h4 class="card-title">
                                 <i class="fa fa-edit"></i>
@@ -168,7 +168,7 @@
                             $hasil = $lihat -> DetailBarang($id);
                         foreach ($hasil as $isi) {
                     ?>
-                    <div class="card col-sm-3 col-md-3" style="min-width: 24%; width:185px;">
+                    <div class="card col-sm-3 col-md-3" style="min-width: 25%; width:320px;">
                         <div class="card-header">
                             <h4 class="card-title">
                                 <i class="fa fa-briefcase"></i>
@@ -279,7 +279,7 @@
                     <?php
                         }else{
                     ?>
-                    <div class="card col-sm-3 col-md-3" style="min-width: 24%; width:185px;">
+                    <div class="card col-sm-3 col-md-3" style="min-width: 25%; width:320px;">
                         <div class="card-header">
                             <h4 class="card-title">
                                 <i class="fa fa-plus"></i>
@@ -398,21 +398,64 @@
                                     <i class="fa fa-refresh"></i>
                                     <span>Refresh</span>
                                 </a>
+                                <a href="../ui/header.php?page=barang&restok=yes" class="btn btn-danger">
+                                    <i class="fa fa-cubes"></i>
+                                    <span>Lihat Restok</span>
+                                </a>
                             </div>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive-md table-responsive-lg">
+                                <?php 
+                                    if(!empty($_GET["restok"]=="yes")){
+                                ?>
                                 <table class="table table-striped" id="example1">
                                     <thead>
                                         <tr>
-                                            <th class="fs-6 text-center fw-normal">No</th>
-                                            <th class="fs-6 text-center fw-normal">Nama Barang</th>
+                                            <th>No</th>
+                                            <th>Nama Barang</th>
+                                            <th>Kategori</th>
+                                            <th>Stok Awal</th>
+                                            <th>Restok</th>
+                                            <th>Stok Sisa</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php 
+                                            $sql = "SELECT db_persediaan.*, db_barang.id_barang, db_barang.nama_barang, db_kategori.id_kategori, db_kategori.nama_kategori FROM db_persediaan inner join db_barang on db_persediaan.id_barang = db_barang.id_barang inner join db_kategori on db_persediaan.id_kategori = db_kategori.id_kategori ORDER BY id DESC";
+                                            $hasil = $conn->query($sql);
+                                            $no = 1;
+                                            foreach ($hasil as $isi) {
+                                        ?>
+                                        <tr>
+                                            <td><?php echo $no++; ?></td>
+                                            <td><?php echo $isi["nama_barang"]; ?></td>
+                                            <td><?php echo $isi["nama_kategori"]; ?></td>
+                                            <td><?php echo $isi["stok"]; ?></td>
+                                            <td><?php echo $isi["restok"]; ?></td>
+                                            <td><?php echo $isi["sisa"]; ?></td>
+                                        </tr>
+                                        <?php
+                                            }
+                                        ?>
+                                    </tbody>
+                                </table>
+                                <?php
+                                    }else{
+                                ?>
+                                <table class="table table-striped" id="example1">
+                                    <thead>
+                                        <tr>
+                                            <th class="fs-6 text-start fw-normal" style="min-width: 2%; width:8px;">No
+                                            </th>
+                                            <th class="fs-6 text-center fw-normal"
+                                                style="min-width: 5.25%; width:100px;">Nama Barang</th>
                                             <th class="fs-6 text-center fw-normal">Kategori</th>
                                             <th class="fs-6 text-center fw-normal">Merk Barang</th>
                                             <th class="fs-6 text-center fw-normal">Harga Beli</th>
                                             <th class="fs-6 text-center fw-normal">Harga Jual</th>
-                                            <th class="fs-6 text-center fw-normal">Stok Awal</th>
-                                            <th class="fs-6 text-center fw-normal">Stok Sisa</th>
+                                            <th class="fs-6 text-center fw-normal">Stok</th>
+                                            <th class="fs-6 text-center fw-normal">Sisa</th>
                                             <th class="fs-6 text-center fw-normal">Satuan</th>
                                             <th class="fs-6 text-center fw-normal">Photo</th>
                                             <th class="fs-6 text-center fw-normal">Aksi</th>
@@ -433,7 +476,7 @@
                                             foreach ($hasil as $isi) {
                                         ?>
                                         <tr>
-                                            <td class="text-center fw-normal"><?php echo $no; ?></td>
+                                            <td class="text-start fw-normal"><?php echo $no; ?></td>
                                             <td class="text-center fw-normal"><?php echo $isi["nama_barang"]; ?>
                                             </td>
                                             <td class="text-center fw-normal">
@@ -446,26 +489,27 @@
                                                 <?php echo number_format($isi["harga_jual"]); ?></td>
                                             <td class="text-center fw-normal"><?php echo $isi["stok"]; ?></td>
                                             <?php 
-                                                if($isi["stok"] <= '3'){
+                                                if($isi["stok_sisa"] <= '3'){
                                             ?>
-                                            <form action="../ui/header.php?act=restok-barang"
-                                                enctype="multipart/form-data" method="post">
-                                                <input type="hidden" name="id_barang"
-                                                    value="<?php echo $isi['id_barang'];?>" class="form-control">
-                                                <input type="number" name="restok" class="form-control w-50" required>
-                                                <button class="btn btn-secondary btn-sm" type="submit">
-                                                    <i class="fa fa-save"></i>
-                                                </button>
-                                                <a href="../ui/header.php?act=hapus-barang&id_barang=<?=$isi["id_barang"]?>"
-                                                    class="btn btn-danger btn-sm">
-                                                    <i class="fa fa-trash"></i>
-                                                </a>
-                                            </form>
-                                            <?php
-                                                }elseif($isi["stok"] == '0'){
+                                            <td>
+                                                <form action="../ui/header.php?act=restok-barang"
+                                                    enctype="multipart/form-data" method="post">
+                                                    <input type="hidden" name="id_barang"
+                                                        value="<?php echo $isi['id_barang'];?>" class="form-control">
+                                                    <input type="number" name="sisa" class="form-control" required>
+                                                    <button class="btn btn-secondary" type="submit">
+                                                        <i class="fa fa-save"></i>
+                                                    </button>
+                                                    <a href="../ui/header.php?act=hapus-barang&id_barang=<?=$isi["id_barang"]?>"
+                                                        class="btn btn-danger">
+                                                        <i class="fa fa-trash"></i>
+                                                    </a>
+                                                </form>
+                                                <?php
+                                                }elseif($isi["stok_sisa"] == '0'){
                                             ?>
-                                            <button class="btn btn-danger">Habis</button>
-                                            <?php
+                                                <button class="btn btn-danger">Habis</button>
+                                                <?php
                                                 }else{
                                             ?>
                                             <td class="text-center fw-normal"><?php echo $isi["stok_sisa"]; ?>
@@ -516,6 +560,7 @@
                                         $no++;
                                         $hb += $isi["stok"] * $isi["harga_beli"];
                                         $hj += $isi["stok"] * $isi["harga_jual"];
+                                        $stok += $isi["stok"];
                                             }
                                         ?>
                                     </tbody>
@@ -527,6 +572,9 @@
                                         <th colspan="4" class="bg-secondary"></th>
                                     </tfoot>
                                 </table>
+                                <?php 
+                                    }
+                                ?>
                             </div>
                         </div>
                     </div>

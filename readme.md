@@ -27,3 +27,6 @@
      <li>Fitur print setiap data contoh : laporan reservasi</li>
      <li>Settings : edit account & log out</li>
    </ol>
+
+Photo Dashboard Terbaru :
+  <img src="assets/item/bengkel-v2.PNG" style="width:100%; display:blcock;" alt="Dashboard Admin">

@@ -132,26 +132,41 @@ if($_SESSION["user_level"] == "admin"){
                         <li class="nav-item mx-2">
                             <div class="dropdown">
                                 <a href="" role="button" class="btn btn-outline-light dropdown-toggle"
-                                    data-bs-toggle="dropdown" aria-expanded="false">
-                                    <span class="fa fa-info-circle mx-1"></span>
-                                    <span class="fs-5">Info data barang</span>
+                                    data-bs-toggle="dropdown">
+                                    <?php 
+                                        $sql = "select * from db_barang where stok_sisa <= 3";
+                                        $row = $conn->query($sql);
+                                        $cek = mysqli_num_rows($row);
+                                        if($cek > '3'){
+                                    ?>
+                                    <i class="fa fa-info text-red"></i>
+                                    <span class="fs-5">Info Data Barang</span>
+                                    <ul class="dropdown-menu">
+                                        <li class="dropdown-item">
+                                            <span class='fas fa-info text-red'></span> Ada <span
+                                                style='color:red'><?php echo $cek ?></span>
+                                            barang yang Stok tersisa sudah kurang dari 3 items. silahkan isi stock
+                                            barang lagi !!
+                                            <a href='../ui/header.php?page=barang&stok=yes'
+                                                class='btn btn-outline-info nav-link active'>Cek Barang
+                                                <i class='fas fa-angle-double-right'></i>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                    <?php
+                                    }else{
+                                ?>
+                                    <i class="fa fa-info"></i>
+                                    <span class="fs-5">Info Data Barang</span>
+                                    <ul class="dropdown-menu">
+                                        <li class="dropdown-item">
+                                            <p class="dropdown-item-desc">Tidak Ada barang yang tersisa !!!</p>
+                                        </li>
+                                    </ul>
                                 </a>
-                                <ul class="dropdown-menu" aria-hidden="true" tabindex="-1">
-                                    <li class="dropdown-item">
-                                        <?php 
-                                            $sql = "select * from db_barang where stok_sisa <= 3";
-                                            $row = $conn->query($sql);
-                                            $cek = mysqli_num_rows($row);
-                                            if($cek > '3'){
-                                                echo "
-                                                <span class='fas fa-info'></span> Ada <span style='color:red'>$cek</span>
-                                                barang yang Stok tersisa sudah kurang dari 3 items. silahkan isi stock barang lagi !!
-                                                <a href='../ui/header.php?page=barang&stok=yes' class='btn btn-outline-info nav-link active'>Cek Barang <i class='fas fa-angle-double-right'></i></a>
-                                                ";
-                                            }
-                                        ?>
-                                    </li>
-                                </ul>
+                                <?php
+                                    }
+                                ?>
                             </div>
                         </li>
                     </ul>

@@ -48,7 +48,19 @@ class View {
     }
 
     public function rowKeungan(){
-        $sql = "SELECT SUM(harga_jual*stok) as jual FROM db_barang";
+        $sql = "SELECT SUM(harga_beli*stok) as jual FROM db_barang";
+        $row = $this->db->query($sql);
+        return $row;
+    }
+
+    public function rowRestok(){
+        $sql = "SELECT SUM(restok) as stok FROM db_persediaan";
+        $row = $this->db->query($sql);
+        return $row;
+    }
+
+    public function rowSisa(){
+        $sql = "SELECT SUM(sisa) as restok FROM db_persediaan";
         $row = $this->db->query($sql);
         return $row;
     }
@@ -70,7 +82,7 @@ class View {
         $this->db->query($sql);
     }
 
-    public function EditanBarang($id, $id_kategori, $nama, $merk, $beli, $jual, $stok, $stok_sisa, $satuan, $image, $tanggal){
+    public function EditanBarang($id_kategori, $nama, $merk, $beli, $jual, $stok, $stok_sisa, $satuan, $image, $tanggal, $id){
         $table = "db_barang";
         $dataTable["db_barang"] = array(
             $id => htmlspecialchars($_POST["id_barang"]),
@@ -98,19 +110,24 @@ class View {
         $this->db->query($sql);
     }
 
-    public function RestokBarang($id, $restok, $stok){
+    public function RestokBarang($stok, $restok, $id){
         $table = "db_barang";
         $dataTable["db_barang"] = array(
-            $id => htmlspecialchars($_POST["id_barang"]),
-            $restok => htmlspecialchars($_POST["restok"]),
-            $stok => htmlspecialchars($_POST["stok"])
+            $stok => htmlspecialchars($_POST["stok"]),
+            $restok => htmlspecialchars($_POST["sisa"]),
+            $id => htmlspecialchars($_POST["id_barang"])
         );
         $sql_barang = "SELECT * FROM $table WHERE id_barang = '$id'";
         $row_barang = $this->db->query($sql_barang);
         $hsl = $row_barang->fetch_array();
         $total = $hsl["stok"] - $restok;
-        $sisa = $hsl["stok"];
-        $this->db->query("UPDATE $table SET stok='$sisa', stok_sisa='$total' WHERE id_barang='$id'");
+        $sisa = $total;
+        if($hsl["stok_sisa"] <= '3'){
+            $this->db->query("UPDATE $table SET stok='$hsl[stok]', stok_sisa='$total' WHERE id_barang='$id'");
+            $this->db->query("UPDATE db_persediaan SET stok='$hsl[stok]', restok='$restok', sisa='$sisa' WHERE id_barang='$id'");    
+        }else{
+            $this->db->query("INSERT db_persediaan SET id_barang='$hsl[id_barang]', id_kategori='$hsl[id_kategori]' stok='$hsl[stok]', restok='$restok', sisa='$sisa'"); 
+        }
     }
 
     /* Kategori */
@@ -134,9 +151,9 @@ class View {
         return $row;
     }
 
-    public function EditanKategori($id_kategori, $kategori){
+    public function EditanKategori($kategori,$id_kategori){
         $table = "db_kategori";
-        array($id_kategori => htmlspecialchars($_POST["id_kategori"]), $kategori => htmlspecialchars($_POST["kategori"]));
+        array($id_kategori => htmlspecialchars($_POST["id"]), $kategori => htmlspecialchars($_POST["kategori"]));
         $row = $this -> db -> query("UPDATE $table SET nama_kategori = '$kategori' WHERE id_kategori='$id_kategori'");
         return $row;
     }

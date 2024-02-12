@@ -57,7 +57,7 @@
                             <div class="card-body">
                                 <form action="../ui/header.php?act=edit-kategori" method="post">
                                     <input type="hidden" name="id" id="id_kategori" class="form-control" required
-                                        aria-required="required" value="<?=""?>">
+                                        aria-required="required" value="<?=$isi["id_kategori"]?>">
                                     <label for="nama_kategori">Nama Kategori</label>
                                     <input type="text" name="kategori" id="nama_kategori"
                                         value="<?=$isi["nama_kategori"]?>" class="form-control" required
