@@ -7,6 +7,20 @@ require_once("../ui/navbar.php");
     <div class="p-5 container-md container-lg bg-secondary rounded-2 mt-5 pt-5 pb-5 mb-5">
         <div class="text-start fw-normal text-white fs-4 mb-2 text-decoration-underline">
             Dashboard Laporan Pada Bengkel Sahabat Motor
+            <?php 
+            $sql = "select * from db_barang where restok <= 3";
+            $row = $conn->query($sql);
+            $r = mysqli_num_rows($row);
+            if($r > 0){
+                echo "
+                <div class='alert alert-warning fs-5'>
+                    <span class='glyphicon glyphicon-info-sign'></span> Ada <span style='color:red'>$r</span>
+                     barang yang Stok tersisa sudah kurang dari 3 items. silahkan pesan lagi !! <span class='pull-right'>
+                     <a href='../ui/header.php?page=barang&stok=yes'>Cek Barang <i class='fa fa-angle-double-right'></i></a></span>
+                </div>
+                ";
+            }
+            ?>
         </div>
         <div class="py-5 p-3 container-fluid rounded-2 bg-light">
             <div class="text-end fw-normal text-black fs-4 mb-3">
@@ -79,7 +93,6 @@ require_once("../ui/navbar.php");
                         </div>
                         <div class="text-end">
                             <a href="#" role="button" class="btn fa fa-arrow-right"></a>
-                            <!-- <a href="../reservasi/" role="button" class="btn fa fa-arrow-right"></a> -->
                         </div>
                     </div>
                 </div>
@@ -87,33 +100,17 @@ require_once("../ui/navbar.php");
                     <div class="card-body">
                         <div class="card-header text-center">
                             <h5 class="fa fa-cubes"></h5>
-                            <span class="mx-2">Data Restok</span>
+                            <h6 class="text-center">Pengambilan Restok</h6>
                         </div>
                     </div>
                     <div class="card-footer">
                         <div class="card-header text-center bg-light">
                             <h5 class="fw-normal">
-                                <?php $hasil = $lihat->RestokRow(); echo $hasil["stok"]; ?></h5>
+                                <?php $hasil = $lihat->RestokRow(); echo $hasil["jml"]; ?>
+                            </h5>
                         </div>
                         <div class="text-end">
-                            <a href="../ui/header.php?page=barang" role="button" class="btn fa fa-arrow-right"></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="card col-md-2 col-lg-2">
-                    <div class="card-body">
-                        <div class="card-header text-center">
-                            <h5 class="fa fa-cubes"></h5>
-                            <span class="mx-2">Data Sisa</span>
-                        </div>
-                    </div>
-                    <div class="card-footer">
-                        <div class="card-header text-center bg-light">
-                            <h5 class="fw-normal">
-                                <?php $hasil = $lihat->SisaRow(); echo $hasil["restok"]; ?></h5>
-                        </div>
-                        <div class="text-end">
-                            <a href="../ui/header.php?page=barang" role="button" class="btn fa fa-arrow-right"></a>
+                            <a href="#" role="button" class="btn fa fa-arrow-right"></a>
                         </div>
                     </div>
                 </div>

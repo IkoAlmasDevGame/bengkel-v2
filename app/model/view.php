@@ -10,33 +10,29 @@ class View {
 
     /* Barang */
     public function LihatFullBarang(){
-        $sql = "SELECT db_barang.*, db_kategori.id_kategori, db_kategori.nama_kategori
-        from db_barang inner join db_kategori on db_barang.id_kategori = db_kategori.id_kategori 
-        ORDER BY id_barang ASC";
+        $sql = "SELECT db_barang.*, db_kategori.id_kategori, db_kategori.nama_kategori from db_barang 
+        inner join db_kategori on db_barang.id_kategori = db_kategori.id_kategori ORDER BY id_barang ASC";
         $row = $this -> db -> query($sql);
         return $row;
     }
 
     public function SisaStok(){
-        $sql = "SELECT db_barang.*, db_kategori.id_kategori, db_kategori.nama_kategori
-        from db_barang inner join db_kategori on db_barang.id_kategori = db_kategori.id_kategori  
-        where stok_sisa <= 3 ORDER BY id_barang ASC";
+        $sql = "SELECT db_barang.*, db_kategori.id_kategori, db_kategori.nama_kategori from db_barang 
+        inner join db_kategori on db_barang.id_kategori = db_kategori.id_kategori where stok_sisa <= 3 ORDER BY id_barang ASC";
         $row = $this -> db -> query($sql);
         return $row;            
     }
 
     public function LihatBarang($id){
-        $sql = "SELECT db_barang.*, db_kategori.id_kategori, db_kategori.nama_kategori
-        from db_barang inner join db_kategori on db_barang.id_kategori = db_kategori.id_kategori 
-        WHERE id_barang = '$id'";
+        $sql = "SELECT db_barang.*, db_kategori.id_kategori, db_kategori.nama_kategori from db_barang 
+        inner join db_kategori on db_barang.id_kategori = db_kategori.id_kategori WHERE id_barang = '$id'";
         $row = $this -> db -> query($sql);
         return $row;
     }
 
     public function EditBarang($id){
-        $sql = "SELECT db_barang.*, db_kategori.id_kategori, db_kategori.nama_kategori
-        from db_barang inner join db_kategori on db_barang.id_kategori = db_kategori.id_kategori 
-        WHERE id_barang = '$id'";
+        $sql = "SELECT db_barang.*, db_kategori.id_kategori, db_kategori.nama_kategori from db_barang 
+        inner join db_kategori on db_barang.id_kategori = db_kategori.id_kategori WHERE id_barang = '$id'";
         $row = $this -> db -> query($sql);
         return $row;
     }
@@ -46,21 +42,15 @@ class View {
         $row = $this->db->query($sql);
         return $row;
     }
+    
+    public function rowRestok(){
+        $sql = "SELECT SUM(restok) as jml FROM db_barang";
+        $row = $this->db->query($sql);
+        return $row;
+    }
 
     public function rowKeungan(){
         $sql = "SELECT SUM(harga_beli*stok) as jual FROM db_barang";
-        $row = $this->db->query($sql);
-        return $row;
-    }
-
-    public function rowRestok(){
-        $sql = "SELECT SUM(restok) as stok FROM db_persediaan";
-        $row = $this->db->query($sql);
-        return $row;
-    }
-
-    public function rowSisa(){
-        $sql = "SELECT SUM(sisa) as restok FROM db_persediaan";
         $row = $this->db->query($sql);
         return $row;
     }
@@ -78,7 +68,7 @@ class View {
             $image => htmlspecialchars($_FILES["image"]["name"]),
             $tanggal => htmlspecialchars($_POST["tanggal_input"])
         );
-        $sql = "INSERT INTO $table (id_barang,id_kategori,nama_barang,merk_barang,harga_beli,harga_jual,stok,stok_sisa,satuan_barang,image,tanggal_input) VALUES ('','$id_kategori','$nama','$merk','$beli','$jual','$stok','$stok','$satuan','$image','$tanggal')";
+        $sql = "INSERT INTO $table (id_barang,id_kategori,nama_barang,merk_barang,harga_beli,harga_jual,stok,stok_sisa,restok,satuan_barang,image,tanggal_input) VALUES ('','$id_kategori','$nama','$merk','$beli','$jual','$stok','$stok','0','$satuan','$image','$tanggal')";
         $this->db->query($sql);
     }
 
@@ -120,14 +110,17 @@ class View {
         $sql_barang = "SELECT * FROM $table WHERE id_barang = '$id'";
         $row_barang = $this->db->query($sql_barang);
         $hsl = $row_barang->fetch_array();
-        $total = $hsl["stok"] - $restok;
-        $sisa = $total;
-        if($hsl["stok_sisa"] <= '3'){
-            $this->db->query("UPDATE $table SET stok='$hsl[stok]', stok_sisa='$total' WHERE id_barang='$id'");
-            $this->db->query("UPDATE db_persediaan SET stok='$hsl[stok]', restok='$restok', sisa='$sisa' WHERE id_barang='$id'");    
-        }else{
-            $this->db->query("INSERT db_persediaan SET id_barang='$hsl[id_barang]', id_kategori='$hsl[id_kategori]' stok='$hsl[stok]', restok='$restok', sisa='$sisa'"); 
-        }
+        $total = $hsl["stok_sisa"] - $restok;
+        $this->db->query("UPDATE $table SET stok='$hsl[stok]', stok_sisa='$total', restok='$restok' WHERE id_barang='$id'");
+    }
+
+    public function BarangCari($cari){
+        $sql = "select db_barang.*, db_kategori.id_kategori, db_kategori.nama_kategori
+        from db_barang inner join db_kategori on db_barang.id_kategori = db_kategori.id_kategori
+        where id_barang like '%$cari%' or nama_barang like '%$cari%' or merk_barang like '%$cari%'";
+        $row = $this->db->query($sql);
+        $hasil = $row->fetch_array();
+        return $hasil;
     }
 
     /* Kategori */
@@ -173,6 +166,92 @@ class View {
         return $row;
     }
 
-}
+    /* Penjualan */
+    public function penjualan(){
+        $sql = "SELECT db_penjualan.* , db_barang.id_barang, db_barang.nama_barang, db_barang.harga_jual from db_penjualan 
+        left join db_barang on db_barang.id_barang = db_penjualan.id_barang ORDER BY id";
+        $row = $this->db->prepare($sql);
+        $row -> execute();
+        $hasil = $row -> fetchAll();
+        return $hasil;
+    } 
 
+    public function jual(){
+        $date = array(date("m-Y"));
+        $sql = "SELECT db_nota_backup.* , db_barang.id_barang, db_barang.nama_barang, db_barang.harga_beli, db_barang.harga_jual from db_nota_backup 
+        left join db_barang on db_barang.id_barang = db_nota_backup.id_barang where db_nota_backup.periode = '$date' ORDER BY id ASC";
+        $row = $this->db->query($sql);
+        $hasil = $row->fetch_array();
+        return $hasil;
+    }
+
+    public function periode_jual($periode){
+        $sql = "SELECT db_nota_backup.* , db_barang.id_barang, db_barang.nama_barang, db_barang.harga_beli, db_barang.harga_jual from db_nota_backup 
+        left join db_barang on db_barang.id_barang = db_nota_backup.id_barang where db_nota_backup.periode = '$periode' ORDER BY id ASC";
+        $row = $this->db->query($sql);
+        return $row;
+    }
+
+    public function hari_jual($hari){
+        $ex = explode('-', $hari);
+        $monthNum  = $ex[1];
+        $monthName = date('F', mktime(0, 0, 0, $monthNum, 10));
+        if ($ex[2] > 9) {
+            $tgl = $ex[2];
+        } else {
+            $tgl1 = explode('0', $ex[2]);
+            $tgl = $tgl1[1];
+        }
+        $cek = $tgl.' '.$monthName.' '.$ex[0];
+        $param = "%{$cek}%";
+        $sql = "SELECT db_nota_backup.* , db_barang.id_barang, db_barang.nama_barang, db_barang.harga_beli, db_barang.harga_jual from db_nota_backup 
+        left join db_barang on db_barang.id_barang=db_nota_backup.id_barang WHERE db_nota_backup.tanggal_input LIKE ? ORDER BY id ASC";
+        $row = $this->db->prepare($sql);
+        $row->execute(array($param));
+        $hasil = $row->fetch();
+        return $hasil;
+    }
+
+    /* Total Belanja */
+    public function jumlah(){
+        $sql = "SELECT SUM(total) as bayar FROM db_penjualan";
+        $row = $this -> db -> prepare($sql);
+        $row -> execute();
+        $hasil = $row->fetch();
+        return $hasil;
+    } 
+
+    public function jumlah_nota(){
+        $sql = "SELECT SUM(total) as bayar FROM db_nota";
+        $row = $this -> db -> prepare($sql);
+        $row -> execute();
+        $hasil = $row->fetch();
+        return $hasil;
+    }
+
+    /* Tambah Keranjan */
+    public function keranjang(){
+        $id = $_GET['id'];
+        $sqbarang = "SELECT * FROM db_barang WHERE id_barang = ?";
+        $rwbarang = $this->db->prepare($sqbarang);
+        $rwbarang->execute(array($id));
+        $row = $rwbarang->fetch();
+
+        if($row['restok'] > 0){
+            $jumlah = 1;
+            $harga = $row['harga_jual'];
+            $total = $row['harga_jual'] * $jumlah;
+            $tgl = date("j F Y, G:i");
+
+            $table = "db_penjualan";
+            $this -> db -> query("INSERT INTO $table (id,id_barang,harga_jual,jumlah,total,tanggal_input) VALUES ('','$id','$harga','$jumlah','$total,','$tgl')");
+            $this -> db -> query("INSERT INTO db_penjualan_backup (id,id_barang,harga_jual,jumlah,total,tanggal_input) VALUES ('','$id','$harga','$jumlah','$total,','$tgl')");
+            header("location:../ui/header.php?page=jual&nota=yes");        
+        }else{
+            echo '<script>alert("Stok Barang Anda Telah Habis !");"</script>';
+            header("location:../ui/header.php?page=jual#keranjang");
+        }
+    }
+    
+}
 ?>

@@ -16,6 +16,7 @@
     require_once("../../../controller/controllerView.php");
 
     $model = new View($conn);
+    $models = new View($configs);
     $lihat = new Controller($conn);
 
     if(isset($_GET['aksi'])){
@@ -66,10 +67,14 @@
                 $lihat->KategoriHapus();
                 header("location:header.php?page=kategori");
                 break;
-            //
+            /* Tambah Keranjang */
+            case 'tambah-keranjang':
+                $model->keranjang();
+                header("location:header.php?page=jual&nota=yes");
+                break;
 
             default:
-                require_once("location:../dashboard/index.php");
+                header("location:../dashboard/index.php");
                 break;
         }
     }
@@ -84,9 +89,17 @@
             case 'kategori':
                 require_once("../kategori/index.php");
                 break;
+                
+            case 'jual':
+                require_once("../jual/index.php");
+                break;
+                
+            case 'print':
+                require_once("../jual/print.php");
+                break;
             
             default:
-                require_once("location:../dashboard/index.php");
+            require_once("../dashboard/index.php");
                 break;
         }
     }

@@ -49,11 +49,6 @@ class Controller {
         $hasil = $row->fetch_array();
         return $hasil;
     }
-    public function SisaRow(){
-        $row = $this->sdb->rowSisa();
-        $hasil = $row->fetch_array();
-        return $hasil;
-    }
 
     public function BarangSimpan(){
         $id_kategori = htmlspecialchars($_POST["kategori"]);

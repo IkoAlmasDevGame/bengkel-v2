@@ -10496,7 +10496,7 @@
 		 * Note that the `pageLength` property will be automatically set to the
 		 * first value given in this array, unless `pageLength` is also provided.
 		 *  @type array
-		 *  @default [ 10, 25, 50, 100 ]
+		 *  @default[ 6, 10, 25, 50, 100 ]
 		 *
 		 *  @dtopt Option
 		 *  @name DataTable.defaults.lengthMenu
@@ -10504,11 +10504,11 @@
 		 *  @example
 		 *    $(document).ready( function() {
 		 *      $('#example').dataTable( {
-		 *        "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]]
+		 *        "lengthMenu": [[6, 10, 25, 50, -1], [6, 10, 25, 50, "All"]]
 		 *      } );
 		 *    } );
 		 */
-		"aLengthMenu": [ 10, 25, 50, 100 ],
+		"aLengthMenu": [ 6, 10, 25, 50, 100 ],
 	
 	
 		/**
@@ -10712,7 +10712,7 @@
 	
 		/**
 		 * Allows the end user to select the size of a formatted page from a select
-		 * menu (sizes are 10, 25, 50 and 100). Requires pagination (`paginate`).
+		 * menu (sizes are 6, 10, 25, 50 and 100). Requires pagination (`paginate`).
 		 *  @type boolean
 		 *  @default true
 		 *
@@ -11502,7 +11502,7 @@
 		 * feature enabled (`lengthChange`) then the end user will be able to override
 		 * this to a custom setting using a pop-up menu.
 		 *  @type int
-		 *  @default 5
+		 *  @default 6
 		 *
 		 *  @dtopt Options
 		 *  @name DataTable.defaults.pageLength
@@ -11912,7 +11912,7 @@
 			/**
 			 * Detail the action that will be taken when the drop down menu for the
 			 * pagination length option is changed. The '_MENU_' variable is replaced
-			 * with a default select list of 10, 25, 50 and 100, and can be replaced
+			 * with a default select list of 6, 10, 25, 50 and 100, and can be replaced
 			 * with a custom select box if required.
 			 *  @type string
 			 *  @default Show _MENU_ entries
@@ -11936,6 +11936,7 @@
 			 *      $('#example').dataTable( {
 			 *        "language": {
 			 *          "lengthMenu": 'Display <select>'+
+			 *            '<option value="6">6</option>'+
 			 *            '<option value="10">10</option>'+
 			 *            '<option value="20">20</option>'+
 			 *            '<option value="30">30</option>'+

@@ -45,13 +45,13 @@
                             foreach ($hasil as $isi) {
                     ?>
                     <div class="card col-sm-3 col-md-3 justify-content-start align-items-start"
-                        style="min-width: 25%; width:320px;">
+                        style="min-width: 18%; width:285px;">
                         <div class="card-header">
                             <h4 class="card-title">
                                 <i class="fa fa-edit"></i>
                                 Edit Barang
                                 <img src="../../../../assets/icon/Logo SMB.png" alt=""
-                                    style="position: relative; left:120px;" width="32">
+                                    style="position: relative; left:80px;" width="32">
                             </h4>
                         </div>
                         <div class="card-body">
@@ -120,6 +120,13 @@
                                         </td>
                                     </tr>
                                     <tr>
+                                        <td class="fs-6">Restok</td>
+                                        <td>
+                                            <input type="number" name="restok" value="<?=$isi["restok"]?>" id=""
+                                                class="form-control" placeholder="" required readonly>
+                                        </td>
+                                    </tr>
+                                    <tr>
                                         <td class="fs-6">Satuan</td>
                                         <td>
                                             <select name="satuan" class="form-control" required>
@@ -168,13 +175,13 @@
                             $hasil = $lihat -> DetailBarang($id);
                         foreach ($hasil as $isi) {
                     ?>
-                    <div class="card col-sm-3 col-md-3" style="min-width: 25%; width:320px;">
+                    <div class="card col-sm-3 col-md-3" style="min-width: 18%; width:285px;">
                         <div class="card-header">
                             <h4 class="card-title">
                                 <i class="fa fa-briefcase"></i>
                                 Lihat Barang
                                 <img src="../../../../assets/icon/Logo SMB.png" alt=""
-                                    style="position: relative; left:120px;" width="32">
+                                    style="position: relative; left:80px;" width="32">
                             </h4>
                         </div>
                         <div class="card-body">
@@ -242,6 +249,14 @@
                                     </td>
                                 </tr>
                                 <tr>
+                                    <td class="fs-6">Restok</td>
+                                    <td>
+                                        <input type="number" name="restok" value="<?=$isi["restok"]?>" id=""
+                                            class="form-control" placeholder="Masukkan Sisa Stok Barang" required
+                                            readonly>
+                                    </td>
+                                </tr>
+                                <tr>
                                     <td class="fs-6">Satuan</td>
                                     <td>
                                         <select name="satuan" class="form-control" required>
@@ -279,13 +294,13 @@
                     <?php
                         }else{
                     ?>
-                    <div class="card col-sm-3 col-md-3" style="min-width: 25%; width:320px;">
+                    <div class="card col-sm-3 col-md-3" style="min-width: 18%; width:285px;">
                         <div class="card-header">
                             <h4 class="card-title">
                                 <i class="fa fa-plus"></i>
                                 Tambah Barang
                                 <img src="../../../../assets/icon/Logo SMB.png" alt=""
-                                    style="position: relative; left:120px;" width="32">
+                                    style="position: relative; left:80px;" width="32">
                             </h4>
                         </div>
                         <div class="card-body">
@@ -383,7 +398,7 @@
                     <?php
                         }
                     ?>
-                    <div class="card" style="min-width: 73.52%; width:820px">
+                    <div class="card" style="min-width: 77.25%; width:928px;">
                         <div class="card-header">
                             <div class="card-header-form">
                                 <h4 class="card-title">
@@ -398,67 +413,27 @@
                                     <i class="fa fa-refresh"></i>
                                     <span>Refresh</span>
                                 </a>
-                                <a href="../ui/header.php?page=barang&restok=yes" class="btn btn-danger">
-                                    <i class="fa fa-cubes"></i>
-                                    <span>Lihat Restok</span>
-                                </a>
                             </div>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive-md table-responsive-lg">
-                                <?php 
-                                    if(!empty($_GET["restok"]=="yes")){
-                                ?>
-                                <table class="table table-striped" id="example1">
-                                    <thead>
-                                        <tr>
-                                            <th>No</th>
-                                            <th>Nama Barang</th>
-                                            <th>Kategori</th>
-                                            <th>Stok Awal</th>
-                                            <th>Restok</th>
-                                            <th>Stok Sisa</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <?php 
-                                            $sql = "SELECT db_persediaan.*, db_barang.id_barang, db_barang.nama_barang, db_kategori.id_kategori, db_kategori.nama_kategori FROM db_persediaan inner join db_barang on db_persediaan.id_barang = db_barang.id_barang inner join db_kategori on db_persediaan.id_kategori = db_kategori.id_kategori ORDER BY id DESC";
-                                            $hasil = $conn->query($sql);
-                                            $no = 1;
-                                            foreach ($hasil as $isi) {
-                                        ?>
-                                        <tr>
-                                            <td><?php echo $no++; ?></td>
-                                            <td><?php echo $isi["nama_barang"]; ?></td>
-                                            <td><?php echo $isi["nama_kategori"]; ?></td>
-                                            <td><?php echo $isi["stok"]; ?></td>
-                                            <td><?php echo $isi["restok"]; ?></td>
-                                            <td><?php echo $isi["sisa"]; ?></td>
-                                        </tr>
-                                        <?php
-                                            }
-                                        ?>
-                                    </tbody>
-                                </table>
-                                <?php
-                                    }else{
-                                ?>
                                 <table class="table table-striped" id="example1">
                                     <thead>
                                         <tr>
                                             <th class="fs-6 text-start fw-normal" style="min-width: 2%; width:8px;">No
                                             </th>
-                                            <th class="fs-6 text-center fw-normal"
+                                            <th class="fs-6 text-start fw-normal"
                                                 style="min-width: 5.25%; width:100px;">Nama Barang</th>
-                                            <th class="fs-6 text-center fw-normal">Kategori</th>
-                                            <th class="fs-6 text-center fw-normal">Merk Barang</th>
-                                            <th class="fs-6 text-center fw-normal">Harga Beli</th>
-                                            <th class="fs-6 text-center fw-normal">Harga Jual</th>
-                                            <th class="fs-6 text-center fw-normal">Stok</th>
-                                            <th class="fs-6 text-center fw-normal">Sisa</th>
-                                            <th class="fs-6 text-center fw-normal">Satuan</th>
-                                            <th class="fs-6 text-center fw-normal">Photo</th>
-                                            <th class="fs-6 text-center fw-normal">Aksi</th>
+                                            <th class="fs-6 text-start fw-normal">Kategori</th>
+                                            <th class="fs-6 text-start fw-normal">Merk Barang</th>
+                                            <th class="fs-6 text-start fw-normal">Harga Beli</th>
+                                            <th class="fs-6 text-start fw-normal">Harga Jual</th>
+                                            <th class="fs-6 text-start fw-normal">Stok</th>
+                                            <th class="fs-6 text-start fw-normal">Sisa</th>
+                                            <th class="fs-6 text-start fw-normal">Restok</th>
+                                            <th class="fs-6 text-start fw-normal">Satuan</th>
+                                            <th class="fs-6 text-start fw-normal">Photo</th>
+                                            <th class="fs-6 text-start fw-normal">Aksi</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -477,19 +452,21 @@
                                         ?>
                                         <tr>
                                             <td class="text-start fw-normal"><?php echo $no; ?></td>
-                                            <td class="text-center fw-normal"><?php echo $isi["nama_barang"]; ?>
+                                            <td class="text-start fw-normal"><?php echo $isi["nama_barang"]; ?>
                                             </td>
-                                            <td class="text-center fw-normal">
+                                            <td class="text-start fw-normal">
                                                 <?php echo $isi["nama_kategori"]; ?></td>
-                                            <td class="text-center fw-normal"><?php echo $isi["merk_barang"]; ?>
+                                            <td class="text-start fw-normal"><?php echo $isi["merk_barang"]; ?>
                                             </td>
-                                            <td class="text-center fw-normal">
-                                                <?php echo number_format($isi["harga_beli"]); ?></td>
-                                            <td class="text-center fw-normal">
-                                                <?php echo number_format($isi["harga_jual"]); ?></td>
-                                            <td class="text-center fw-normal"><?php echo $isi["stok"]; ?></td>
+                                            <td class="text-start fw-normal">
+                                                <?php echo "Rp. ".number_format($isi["harga_beli"]).",-"; ?></td>
+                                            <td class="text-start fw-normal">
+                                                <?php echo "Rp. ".number_format($isi["harga_jual"]).",-"; ?></td>
+                                            <td class="text-start fw-normal"><?php echo $isi["stok"]; ?></td>
+                                            <td class="text-start fw-normal"><?php echo $isi["stok_sisa"]; ?>
+                                            </td>
                                             <?php 
-                                                if($isi["stok_sisa"] <= '3'){
+                                                if($isi["restok"] <= '3'){
                                             ?>
                                             <td>
                                                 <form action="../ui/header.php?act=restok-barang"
@@ -506,24 +483,24 @@
                                                     </a>
                                                 </form>
                                                 <?php
-                                                }elseif($isi["stok_sisa"] == '0'){
+                                                }elseif($isi["restok"] == '0'){
                                             ?>
                                                 <button class="btn btn-danger">Habis</button>
                                                 <?php
                                                 }else{
                                             ?>
-                                            <td class="text-center fw-normal"><?php echo $isi["stok_sisa"]; ?>
-                                            </td>
-                                            <?php
+                                            <td class="text-start fw-normal"><?php echo $isi["restok"]; ?>
+                                                <?php
                                                 }
                                             ?>
-                                            <td class="text-center fw-normal">
+                                            </td>
+                                            <td class="text-start fw-normal">
                                                 <?php echo $isi["satuan_barang"]; ?></td>
-                                            <td class="text-md-center fs-6 fw-normal">
+                                            <td class="text-md-start fs-6 fw-normal">
                                                 <img src="../../../../assets/inventory/<?=$isi["image"]?>"
                                                     alt="<?=$isi["image"]?>" width="32" class="img-rounded">
                                             </td>
-                                            <td class="text-center fw-normal">
+                                            <td class="text-start fw-normal">
                                                 <div class="dropdown">
                                                     <a href="" role="button" class="dropdown-toggle"
                                                         data-bs-toggle="dropdown" aria-expanded="false">
@@ -561,20 +538,21 @@
                                         $hb += $isi["stok"] * $isi["harga_beli"];
                                         $hj += $isi["stok"] * $isi["harga_jual"];
                                         $stok += $isi["stok"];
+                                        $sisa += $isi["stok_sisa"];
+                                        $restok += $isi["restok"];
                                             }
                                         ?>
                                     </tbody>
                                     <tfoot>
                                         <th colspan="4" class="bg-success text-white">Total Semua</th>
-                                        <th class="text-center"><?php echo "Rp. ".number_format($hb).",-" ?></th>
-                                        <th class="text-center"><?php echo "Rp. ".number_format($hj).",-" ?></th>
-                                        <th class="text-center"><?php echo number_format($stok) ?></th>
-                                        <th colspan="4" class="bg-secondary"></th>
+                                        <th class="text-start"><?php echo "Rp. ".number_format($hb).",-" ?></th>
+                                        <th class="text-start"><?php echo "Rp. ".number_format($hj).",-" ?></th>
+                                        <th class="text-start"><?php echo number_format($stok) ?></th>
+                                        <th class="text-start"><?php echo number_format($sisa) ?></th>
+                                        <th class="text-start"><?php echo number_format($restok) ?></th>
+                                        <th colspan="3" class="bg-secondary"></th>
                                     </tfoot>
                                 </table>
-                                <?php 
-                                    }
-                                ?>
                             </div>
                         </div>
                     </div>

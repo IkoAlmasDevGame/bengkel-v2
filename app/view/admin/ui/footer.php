@@ -9,6 +9,29 @@ $(document).ready(function() {
     $("#example1").DataTable();
     $("#example2").DataTable();
 });
+
+$(document).ready(function() {
+    var response = '';
+    $("#cari").change(function() {
+        $.ajax({
+            type: "POST",
+            url: "../jual/barang.php?cari_barang=yes",
+            data: 'keyword=' + $(this).val(),
+            async: false,
+            beforeSend: function(response) {
+                $("#hasil_cari").hide();
+                $("#tunggu").html(
+                    '<p style="color:green"><blink>tunggu sebentar</blink></p>');
+            },
+            success: function(html, response) {
+                $("#tunggu").html('');
+                $("#hasil_cari").show();
+                $("#hasil_cari").html(html);
+            }
+        });
+        return response;
+    });
+});
 </script>
 </body>
 
