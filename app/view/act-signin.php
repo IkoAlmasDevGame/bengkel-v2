@@ -13,7 +13,7 @@ if(isset($_POST["submits"])){
     $sql = "SELECT db_account.*, db_profile.nama FROM db_account join db_profile on db_account.nama = db_profile.nama WHERE email = '$userEmail' and password='$passEmail' || username = '$userEmail' and password='$passEmail'";
     $row = $conn->query($sql);
 
-    if($row->num_rows > 1){
+    if($row->num_rows > 0){
         $response["db_account"] = array($userEmail,$passEmail);
         if($db = $row->fetch_assoc()){
             if($db["user_level"]== "konsumen"){
@@ -29,6 +29,7 @@ if(isset($_POST["submits"])){
             array_push($response["db_account"], $db);
         }
     }else{
+        $_SESSION["status"] = false;
         header("location:index.php");
     }
 }

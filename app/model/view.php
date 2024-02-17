@@ -179,17 +179,20 @@ class View {
     public function jual(){
         $date = array(date("m-Y"));
         $sql = "SELECT db_nota_backup.* , db_barang.id_barang, db_barang.nama_barang, db_barang.harga_beli, db_barang.harga_jual from db_nota_backup 
-        left join db_barang on db_barang.id_barang = db_nota_backup.id_barang where db_nota_backup.periode = '$date' ORDER BY id ASC";
-        $row = $this->db->query($sql);
-        $hasil = $row->fetch_array();
+        left join db_barang on db_barang.id_barang = db_nota_backup.id_barang where db_nota_backup.periode = ? ORDER BY id ASC";
+        $row = $this->db->prepare($sql);
+        $row->execute($date);
+        $hasil = $row->fetch();
         return $hasil;
     }
 
     public function periode_jual($periode){
         $sql = "SELECT db_nota_backup.* , db_barang.id_barang, db_barang.nama_barang, db_barang.harga_beli, db_barang.harga_jual from db_nota_backup 
-        left join db_barang on db_barang.id_barang = db_nota_backup.id_barang where db_nota_backup.periode = '$periode' ORDER BY id ASC";
-        $row = $this->db->query($sql);
-        return $row;
+        left join db_barang on db_barang.id_barang = db_nota_backup.id_barang where db_nota_backup.periode = ? ORDER BY id ASC";
+        $row = $this->db->prepare($sql);
+        $row->execute(array($periode));
+        $hasil = $row->fetch();
+        return $hasil;
     }
 
     public function hari_jual($hari){
@@ -232,10 +235,9 @@ class View {
     /* Tambah Keranjan */
     public function keranjang(){
         $id = $_GET['id'];
-        $sqbarang = "SELECT * FROM db_barang WHERE id_barang = ?";
-        $rwbarang = $this->db->prepare($sqbarang);
-        $rwbarang->execute(array($id));
-        $row = $rwbarang->fetch();
+        $sqbarang = "SELECT * FROM db_barang WHERE id_barang = '$id'";
+        $rwbarang = $this->db->query($sqbarang);
+        $row = $rwbarang->fetch_array();
 
         if($row['restok'] > 0){
             $jumlah = 1;
@@ -252,6 +254,61 @@ class View {
             header("location:../ui/header.php?page=jual#keranjang");
         }
     }
+
+    public function EditKeranjang(){
+        $table = "db_barang";
+        $id = htmlentities($_POST['id']);
+        $id_barang = htmlentities($_POST['id_barang']);
+        $jumlah = htmlentities($_POST['jumlah']);
+        /* Pengeditan data barang */
+        $sqbarang = "SELECT * FROM $table WHERE id_barang = ?";
+        $rwbarang = $this->db->prepare($sqbarang);
+        $rwbarang->execute(array($id_barang));
+        $hasil = $rwbarang->fetch();
+
+        if($hasil['restok'] > $jumlah){
+            $jual = $hasil['harga_jual'];
+            $total = $jual * $jumlah;
+            $data[] = $id;
+            $data[] = $jumlah;
+            $data[] = $total;
+            
+            $sqUpdate = "UPDATE db_penjualan SET jumlah=?, total=? WHERE id=?";
+            $rwUpdate = $this->db->prepare($sqUpdate);
+            $rwUpdate->execute($data);
+            header("location:../ui/header.php?page=jual&nota=yes");
+        }else{
+            echo '<script>alert("Stok Barang Anda Telah Habis !");"</script>';
+            header("location:../ui/header.php?page=jual#keranjang");
+        }
+    }
+
+    public function HapusResetKeranjang(){
+        $sqKeranjang = "DELETE FROM db_penjualan";
+        $rwKeranjang = $this->db->query($sqKeranjang);
+        header("location:../ui/header.php?page=jual");
+        return $rwKeranjang;
+    }
     
+    public function HapusBelanjaan(){
+        $sqBelanja = "DELETE FROM db_nota";
+        $rwBelanja = $this->db->query($sqBelanja);
+        header("location:../ui/header.php?page=jual");
+        return $rwBelanja;
+    }
+
+    public function HapusItemKeranjang(){
+        $brg = $_GET['brg'];
+        $id = $_GET['id'];
+        $sqBarang = "SELECT * from db_barang where id_barang = ?";
+        $rwBarang = $this->db->prepapre($sqBarang);
+        $rwBarang->execute(array($brg));
+
+        $sqPenjualan = "DELETE FROM db_penjualan WHERE id = ?";
+        $rwPenjualan = $this->db->prepare($sqPenjualan);
+        $rwPenjualan->execute(array($id));
+        header("location:../ui/header.php?page=jual");
+    }
+
 }
 ?>

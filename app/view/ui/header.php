@@ -16,6 +16,7 @@
     require_once("../../controller/controllerView.php");
 
     $model = new View($conn);
+    $models = new View($configs);
     $lihat = new Controller($conn);
 
     if(isset($_GET['aksi'])){

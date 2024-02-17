@@ -84,13 +84,13 @@ if($_SESSION["user_level"] == "admin"){
                                 </a>
                                 <ul class="dropdown-menu">
                                     <li>
-                                        <a href="" class="dropdown-item nav-link">
+                                        <a href="../ui/header.php?page=laporan" class="dropdown-item nav-link">
                                             <span class="fas fa-money-bill"></span>
                                             <span>Laporan Keuangan</span>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="" class="dropdown-item nav-link">
+                                        <a href="../ui/header.php?page=reservasi" class="dropdown-item nav-link">
                                             <span class="fas fa-history"></span>
                                             <span>Reservasi Jadwal</span>
                                         </a>

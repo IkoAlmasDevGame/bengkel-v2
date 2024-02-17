@@ -67,9 +67,26 @@
                 $lihat->KategoriHapus();
                 header("location:header.php?page=kategori");
                 break;
+                
             /* Tambah Keranjang */
             case 'tambah-keranjang':
                 $model->keranjang();
+                header("location:header.php?page=jual&nota=yes");
+                break;
+            case 'hapus-keranjang':
+                $model->HapusResetKeranjang();
+                header("location:header.php?page=jual");
+                break;
+            case 'hapus-belanja':
+                $model->HapusBelanjaan();
+                header("location:header.php?page=jual");
+                break;
+            case 'hapus-item':
+                $model->HapusItemKeranjang();
+                header("location:header.php?page=jual");
+                break;
+            case 'update-item':
+                $model->EditKeranjang();
                 header("location:header.php?page=jual&nota=yes");
                 break;
 
@@ -94,8 +111,12 @@
                 require_once("../jual/index.php");
                 break;
                 
-            case 'print':
-                require_once("../jual/print.php");
+            case 'laporan':
+                require_once("../laporan/index.php");
+                break;
+
+            case 'reservasi':
+                require_once("../laporan/reservasi.php");
                 break;
             
             default:

@@ -29,50 +29,10 @@ if($_SESSION["user_level"] == "konsumen"){
                                 <span class="fs-5">Beranda</span>
                             </a>
                         </li>
-                        <!-- <li class="nav-item mx-2">
-                            <div class="dropdown">
-                                <a href="" role="button" class="btn btn-outline-light dropdown-toggle"
-                                    data-bs-toggle="dropdown" aria-expanded="false">
-                                    <span class="fas fa-briefcase"></span>
-                                    <span class="fs-5">kumpulan data</span>
-                                </a>
-                                <ul class="dropdown-menu">
-                                    <li>
-                                        <a href="" class="dropdown-item nav-link">
-                                            <span class="fas fa-cubes"></span>
-                                            <span>Data Barang</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="" class="dropdown-item nav-link">
-                                            <span class="fas fa-cube"></span>
-                                            <span>Data Kategori</span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
-                        <li class="nav-item mx-3">
-                            <div class="dropdown">
-                                <a href="" role="button" class="btn btn-outline-light dropdown-toggle"
-                                    data-bs-toggle="dropdown" aria-expanded="false">
-                                    <span class="fas fa-shopping-bag"></span>
-                                    <span class="fs-5">Penjualan</span>
-                                </a>
-                                <ul class="dropdown-menu">
-                                    <li>
-                                        <a href="" class="dropdown-item nav-link">
-                                            <span class="fas fa-shopping-basket"></span>
-                                            <span>Kasir Penjualan</span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li> -->
                         <li class="nav-item mx-3">
                             <a href="" class="btn btn-outline-light">
                                 <span class="fas fa-envelope"></span>
-                                <span class="fs-5">Kontak Masuk</span>
+                                <span class="fs-5">Kotak Masuk</span>
                             </a>
                         </li>
                         <li class="nav-item mx-3">
@@ -83,12 +43,6 @@ if($_SESSION["user_level"] == "konsumen"){
                                     <span class="fs-5">Laporan</span>
                                 </a>
                                 <ul class="dropdown-menu">
-                                    <li>
-                                        <a href="" class="dropdown-item nav-link">
-                                            <span class="fas fa-money-bill"></span>
-                                            <span>Laporan Keuangan</span>
-                                        </a>
-                                    </li>
                                     <li>
                                         <a href="" class="dropdown-item nav-link">
                                             <span class="fas fa-history"></span>
@@ -126,15 +80,15 @@ if($_SESSION["user_level"] == "konsumen"){
                     </ul>
                 </div>
 
-                <div class="ms-auto text-white fs-5">
+                <div class="ms-auto mx-5 text-white fs-5">
                     <div class="dropdown">
                         <a href="" role="button" class="btn dropdown-toggle text-white" data-bs-toggle="dropdown"
                             aria-expanded="false">
-                            <?php echo ucwords(ucfirst($_SESSION["email"])); ?>
+                            <?php echo ucwords(ucfirst($_SESSION["email_pengguna"])); ?>
                         </a>
                         <ul class="dropdown-menu">
                             <li class="dropdown-item bg-light text-black">
-                                <?php echo ucwords(ucfirst($_SESSION["nama"])) ?>
+                                <?php echo "Nama Anda : ".ucwords(ucfirst($_SESSION["nama_pengguna"])) ?>
                             </li>
                             <li class="dropdown-item bg-light text-black">
                                 <?php echo ucwords(ucfirst($_SESSION["user_level"])) ?>

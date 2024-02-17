@@ -282,14 +282,14 @@
                                         <td class="fs-5">Username / Email</td>
                                         <td>
                                             <input type="text" name="userEmail" class="form-control"
-                                                placeholder="masukkan username / email anda" require>
+                                                placeholder="masukkan username / email anda" required>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td class="fs-5">Password</td>
                                         <td>
                                             <input type="password" name="password" class="form-control"
-                                                placeholder="masukkan password anda" require>
+                                                placeholder="masukkan password anda" required>
                                         </td>
                                     </tr>
                                 </div>
@@ -333,56 +333,56 @@
                                         <td class="fs-5">Email</td>
                                         <td>
                                             <input type="email" name="email" class="form-control"
-                                                placeholder="masukkan email anda" require>
+                                                placeholder="masukkan email anda" required>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td class="fs-5">Username</td>
                                         <td>
                                             <input type="text" name="username" class="form-control"
-                                                placeholder="masukkan username anda" require>
+                                                placeholder="masukkan username anda" required>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td class="fs-5">Password</td>
                                         <td>
                                             <input type="password" name="password" class="form-control"
-                                                placeholder="masukkan password anda" require>
+                                                placeholder="masukkan password anda" required>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td class="fs-5">Nama</td>
                                         <td>
                                             <input type="text" name="nama" class="form-control"
-                                                placeholder="masukkan nama anda" require>
+                                                placeholder="masukkan nama anda" required>
                                         </td>
                                     </tr>
                                     <tr hidden>
                                         <td class="fs-5">Jabatan</td>
                                         <td>
                                             <input type="text" name="user_level" value="konsumen" class="form-control"
-                                                placeholder="masukkan jabatan anda" require readonly>
+                                                placeholder="masukkan jabatan anda" required readonly>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td class="fs-5">Alamat Rumah</td>
                                         <td>
                                             <input type="text" name="alamat" class="form-control"
-                                                placeholder="masukkan alamat rumah anda" require>
+                                                placeholder="masukkan alamat rumah anda" required>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td class="fs-5">Tanggal Lahir</td>
                                         <td>
                                             <input type="date" name="tanggal_lahir" class="form-control"
-                                                placeholder="masukkan tanggal lahir anda" require>
+                                                placeholder="masukkan tanggal lahir anda" required>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td class="fs-5">Telepon</td>
                                         <td>
                                             <input type="number" name="telepon" class="form-control"
-                                                placeholder="masukkan telepon anda" require>
+                                                placeholder="masukkan telepon anda" required>
                                         </td>
                                     </tr>
                                 </div>
