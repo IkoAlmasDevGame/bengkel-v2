@@ -30,7 +30,7 @@ if($_SESSION["user_level"] == "konsumen"){
                             </a>
                         </li>
                         <li class="nav-item mx-3">
-                            <a href="" class="btn btn-outline-light">
+                            <a href="../ui/header.php?page=pesan" class="btn btn-outline-light">
                                 <span class="fas fa-envelope"></span>
                                 <span class="fs-5">Kotak Masuk</span>
                             </a>
@@ -44,9 +44,17 @@ if($_SESSION["user_level"] == "konsumen"){
                                 </a>
                                 <ul class="dropdown-menu">
                                     <li>
-                                        <a href="" class="dropdown-item nav-link">
+                                        <a href="../ui/header.php?page=reservasi&nama=<?=$_SESSION['nama_pengguna']?>"
+                                            class="dropdown-item nav-link">
                                             <span class="fas fa-history"></span>
                                             <span>Reservasi Jadwal</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="../ui/header.php?page=histori&nama=<?=$_SESSION['nama_pengguna']?>"
+                                            class="dropdown-item nav-link">
+                                            <span class="fas fa-history"></span>
+                                            <span>Histori Services</span>
                                         </a>
                                     </li>
                                 </ul>

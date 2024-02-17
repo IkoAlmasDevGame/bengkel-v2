@@ -32,6 +32,28 @@
             exit(0);
         }
     }
+
+    if(!isset($_GET["page"])){
+
+    }else{
+        switch ($_GET["page"]) {
+            case 'reservasi':
+                require_once("../laporan/reservasi.php");
+                break;
+
+            case 'histori':
+                require_once("../laporan/index.php");
+                break;
+                
+            case 'pesan':
+                require_once("../pesan/index.php");
+                break;
+            
+            default:
+                require_once("../dashboard/index.php");
+                break;
+        }
+    }
     ?>
     <meta charset="UTF-8">
     <meta content='text/html; charset=iso-8859-1' http-equiv='Content-type' />
