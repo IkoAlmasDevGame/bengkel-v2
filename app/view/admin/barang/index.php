@@ -405,7 +405,7 @@
                                     <i class="fa fa-briefcase"></i>
                                     <span>Data Barang</span>
                                 </h4>
-                                <a href="../ui/header.php?page=barang&stok=yes" class="btn btn-primary">
+                                <a href="../ui/header.php?page=barang&restok=yes" class="btn btn-primary">
                                     <i class="fa fa-list-alt"></i>
                                     <span>Stok Barang</span>
                                 </a>
@@ -443,7 +443,7 @@
                                             $hj = 0;
                                             $no = 1;
 
-                                            if(!empty($_GET["stok"]=="yes")){
+                                            if(!empty($_GET["restok"]=="yes")){
                                                 $hasil = $lihat->StokBarang();
                                             }else{
                                                 $hasil = $lihat->Barang();

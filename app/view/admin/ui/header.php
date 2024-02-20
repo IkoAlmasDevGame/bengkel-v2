@@ -118,6 +118,10 @@
             case 'reservasi':
                 require_once("../laporan/reservasi.php");
                 break;
+
+            case 'edit-akun':
+                require_once("../settings/index.php");
+                break;
             
             default:
             require_once("../dashboard/index.php");
@@ -142,9 +146,22 @@
     <style type="text/css">
     .fa-gear {
         animation: gears 3s linear infinite;
+        text-shadow: 1.2px 0px 1.2px gray;
     }
 
     @keyframes gears {
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+
+    .fa-refresh {
+        animation: refresh 3s linear infinite;
+        color: white;
+        text-shadow: 1px 0px 1px gray;
+    }
+
+    @keyframes refresh {
         100% {
             transform: rotate(360deg);
         }

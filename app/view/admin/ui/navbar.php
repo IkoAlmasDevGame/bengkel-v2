@@ -70,12 +70,6 @@ if($_SESSION["user_level"] == "admin"){
                             </div>
                         </li>
                         <li class="nav-item mx-3">
-                            <a href="" class="btn btn-outline-light">
-                                <span class="fas fa-envelope"></span>
-                                <span class="fs-5">Kotak Masuk</span>
-                            </a>
-                        </li>
-                        <li class="nav-item mx-3">
                             <div class="dropdown">
                                 <a href="" role="button" class="btn btn-outline-light dropdown-toggle"
                                     data-bs-toggle="dropdown" aria-expanded="false">
@@ -107,15 +101,10 @@ if($_SESSION["user_level"] == "admin"){
                                 </a>
                                 <ul class="dropdown-menu">
                                     <li>
-                                        <a href="" class="dropdown-item nav-link">
+                                        <a href="../ui/header.php?page=edit-akun&email=<?=$_SESSION['email_pengguna']?>"
+                                            class="dropdown-item nav-link">
                                             <span class="fas fa-user-alt"></span>
                                             <span>Edit Account</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="" class="dropdown-item nav-link">
-                                            <span class="fas fa-info"></span>
-                                            <span>Edit Informasi</span>
                                         </a>
                                     </li>
                                     <li>

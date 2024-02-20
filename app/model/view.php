@@ -232,6 +232,14 @@ class View {
         return $hasil;
     }
 
+    public function total_nota(){
+        $sql = "SELECT SUM(total) as total FROM db_nota_backup";
+        $row = $this -> db -> prepare($sql);
+        $row -> execute();
+        $hasil = $row->fetch();
+        return $hasil;
+    }
+
     /* Tambah Keranjan */
     public function keranjang(){
         $id = $_GET['id'];
@@ -308,6 +316,68 @@ class View {
         $rwPenjualan = $this->db->prepare($sqPenjualan);
         $rwPenjualan->execute(array($id));
         header("location:../ui/header.php?page=jual");
+    }
+
+    /* Reservasi */
+    public function merkKendaraan(){
+        $table = "db_kendaraan";
+        $row = $this->db->query("SELECT * FROM $table ORDER BY id ASC");
+        return $row;  
+    }
+
+    public function ReservasiTambah(){
+        $emailpengguna = htmlspecialchars($_POST['email']);
+        $platnomer = htmlspecialchars($_POST['plat_kendaraan']);
+        $merkendaraan = htmlspecialchars($_POST['merk_kendaraan']);
+        $tanggal = htmlspecialchars($_POST['tanggal_input']);
+        $waktu = htmlspecialchars($_POST['waktu_input']);
+
+        $rowPengguna = "SELECT * FROM db_account WHERE email='$emailpengguna' order by id asc";
+        $tablePengguna = $this->db->query($rowPengguna);
+        $rwPengguna = $tablePengguna->fetch_assoc();
+        $_SESSION['pengguna'] = $rwPengguna['email'];
+
+        /* Data ditambahkan */
+        $table = "db_reservasi";
+        $sqReservasi = "INSERT INTO $table (id,email,plat_kendaraan,merk_kendaraan,tanggal_input,waktu_input) VALUES ('','$_SESSION[pengguna]','$platnomer','$merkendaraan','$tanggal','$waktu')";
+        $this->db->query($sqReservasi);
+        header("location:../ui/header.php?page=reservasi&email=".$_SESSION['pengguna']);
+    }
+
+    public function reservasi($email){
+        $table = "db_reservasi";
+        $email = $_SESSION['email_pengguna'];
+        $rowTable = "SELECT * FROM $table WHERE email = '$email' order by id ASC";
+        $hasil = $this->db->query($rowTable);
+        return $hasil;
+    }
+
+    public function ReservasiEdit(){
+        $id = htmlspecialchars($_POST['id']);
+        $emailpengguna = htmlspecialchars($_POST['email']);
+        $platnomer = htmlspecialchars($_POST['plat_kendaraan']);
+        $merkendaraan = htmlspecialchars($_POST['merk_kendaraan']);
+        $tanggal = htmlspecialchars($_POST['tanggal_input']);
+        $waktu = htmlspecialchars($_POST['waktu_input']);
+
+        $rowPengguna = "SELECT * FROM db_account WHERE email='$emailpengguna' order by id asc";
+        $tablePengguna = $this->db->query($rowPengguna);
+        $rwPengguna = $tablePengguna->fetch_assoc();
+        $_SESSION['pengguna'] = $rwPengguna['email'];
+
+        /* Data ditambahkan */
+        $table = "db_reservasi";
+        $sqReservasi = "UPDATE $table SET email='$_SESSION[pengguna]', plat_kendaraan='$platnomer', merk_kendaraan='$merkendaraan', tanggal_input='$tanggal', waktu_input='$waktu' WHERE id='$id'";
+        $this->db->query($sqReservasi);
+        header("location:../ui/header.php?page=reservasi&email=".$_SESSION['pengguna']);
+    }
+
+    public function Lihatreservasi($id){
+        $table = "db_reservasi";
+        $id = htmlspecialchars($_GET['edit']);
+        $rowTable = "SELECT * FROM $table WHERE id='$id'";
+        $hasil = $this->db->query($rowTable);
+        return $hasil;
     }
 
 }

@@ -33,6 +33,24 @@
         }
     }
 
+    if(!isset($_GET['act'])){
+
+    }else{
+        switch ($_GET['act']) {
+            case 'reservasi-tambah':
+                $model->ReservasiTambah();
+                break;
+
+            case 'reservasi-edit':
+                $model->ReservasiEdit();
+                break;
+            
+            default:
+                require_once("../dashboard/index.php");
+                break;
+        }
+    }
+
     if(!isset($_GET["page"])){
 
     }else{
@@ -40,15 +58,11 @@
             case 'reservasi':
                 require_once("../laporan/reservasi.php");
                 break;
-
-            case 'histori':
-                require_once("../laporan/index.php");
+                
+            case 'edit':
+                require_once("../settings/index.php");
                 break;
                 
-            case 'pesan':
-                require_once("../pesan/index.php");
-                break;
-            
             default:
                 require_once("../dashboard/index.php");
                 break;
@@ -65,7 +79,8 @@
     <!--  -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link rel="stylesheet" href="../../../dist/css/glyphicon.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/dataTables.bootstrap5.min.css">
+    <link rel="stylesheet" href="../../../../dist/css/glyphicon.css">
 
     <style type="text/css">
     .fa-gear {
@@ -73,6 +88,16 @@
     }
 
     @keyframes gears {
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+
+    .fa-refresh {
+        animation: refresh 3s linear infinite;
+    }
+
+    @keyframes refresh {
         100% {
             transform: rotate(360deg);
         }

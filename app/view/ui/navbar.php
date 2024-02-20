@@ -30,12 +30,6 @@ if($_SESSION["user_level"] == "konsumen"){
                             </a>
                         </li>
                         <li class="nav-item mx-3">
-                            <a href="../ui/header.php?page=pesan" class="btn btn-outline-light">
-                                <span class="fas fa-envelope"></span>
-                                <span class="fs-5">Kotak Masuk</span>
-                            </a>
-                        </li>
-                        <li class="nav-item mx-3">
                             <div class="dropdown">
                                 <a href="" role="button" class="btn btn-outline-light dropdown-toggle"
                                     data-bs-toggle="dropdown" aria-expanded="false">
@@ -44,17 +38,10 @@ if($_SESSION["user_level"] == "konsumen"){
                                 </a>
                                 <ul class="dropdown-menu">
                                     <li>
-                                        <a href="../ui/header.php?page=reservasi&nama=<?=$_SESSION['nama_pengguna']?>"
+                                        <a href="../ui/header.php?page=reservasi&email=<?=$_SESSION['email_pengguna']?>"
                                             class="dropdown-item nav-link">
                                             <span class="fas fa-history"></span>
                                             <span>Reservasi Jadwal</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="../ui/header.php?page=histori&nama=<?=$_SESSION['nama_pengguna']?>"
-                                            class="dropdown-item nav-link">
-                                            <span class="fas fa-history"></span>
-                                            <span>Histori Services</span>
                                         </a>
                                     </li>
                                 </ul>
@@ -69,7 +56,8 @@ if($_SESSION["user_level"] == "konsumen"){
                                 </a>
                                 <ul class="dropdown-menu">
                                     <li>
-                                        <a href="" class="dropdown-item nav-link">
+                                        <a href="../ui/header.php?page=edit&email=<?=$_SESSION['email_pengguna']?>"
+                                            class="dropdown-item nav-link">
                                             <span class="fas fa-user-alt"></span>
                                             <span>Edit Account</span>
                                         </a>

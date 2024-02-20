@@ -30,6 +30,7 @@ if(isset($_POST["submited"])){
             array_push($response["db_pengguna"], $db);
         }
     }else{
+        $_SESSION["status"] = false;
         header("location:index.php");
     }
 }

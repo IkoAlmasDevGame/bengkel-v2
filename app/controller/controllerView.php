@@ -157,6 +157,13 @@ class Controller {
         $hasil = $row->fetch_array();
         return $hasil;
     }
+
+    /*Kendaraan*/ 
+    public function Merk(){
+        $hasil = $this->sdb->merkKendaraan();
+        return $hasil;
+    }
+
 }
 
 ?>

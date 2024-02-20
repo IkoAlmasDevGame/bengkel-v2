@@ -30,9 +30,10 @@
                 <table class="table table-striped" style="width:100%;">
                     <tbody>
                         <?php 
-                            if(isset($_GET['email'])){
-                            $email = $_GET['email'];
-                            $row = "SELECT * FROM db_reservasi WHERE email = '$email'";
+                            if(isset($_GET['print'])){
+                            $email = $_SESSION['email_pengguna'];
+                            $print = htmlspecialchars($_GET['print']);
+                            $row = "SELECT * FROM db_reservasi WHERE email = '$email' and id='$print'";
                             $rowTable = $conn->query($row);
                             foreach ($rowTable as $isi) {
                         ?>

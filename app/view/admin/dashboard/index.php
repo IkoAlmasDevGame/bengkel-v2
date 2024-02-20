@@ -1,6 +1,7 @@
 <?php 
 require_once("../ui/header.php");
 require_once("../ui/navbar.php");
+$hasil = $models->total_nota();
 ?>
 
 <div class="col-md-12 col-lg-12">
@@ -16,7 +17,7 @@ require_once("../ui/navbar.php");
                 <div class='alert alert-warning fs-5'>
                     <span class='glyphicon glyphicon-info-sign'></span> Ada <span style='color:red'>$r</span>
                      barang yang Stok tersisa sudah kurang dari 3 items. silahkan pesan lagi !! <span class='pull-right'>
-                     <a href='../ui/header.php?page=barang&stok=yes'>Cek Barang <i class='fa fa-angle-double-right'></i></a></span>
+                     <a href='../ui/header.php?page=barang&restok=yes'>Cek Barang <i class='fa fa-angle-double-right'></i></a></span>
                 </div>
                 ";
             }
@@ -24,7 +25,7 @@ require_once("../ui/navbar.php");
         </div>
         <div class="py-5 p-3 container-fluid rounded-2 bg-light">
             <div class="text-end fw-normal text-black fs-4 mb-3">
-                <?php echo "Rp. ".number_format(0); ?>
+                <?php echo "Rp. ".number_format($hasil["total"]); ?>
             </div>
             <div class="border border-top mb-3"></div>
             <div class="d-flex justify-content-between align-items-center gap-3 flex-wrap">
@@ -110,7 +111,7 @@ require_once("../ui/navbar.php");
                             </h5>
                         </div>
                         <div class="text-end">
-                            <a href="#" role="button" class="btn fa fa-arrow-right"></a>
+                            <a href="../ui/header.php?page=barang" role="button" class="btn fa fa-arrow-right"></a>
                         </div>
                     </div>
                 </div>
