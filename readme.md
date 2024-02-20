@@ -29,6 +29,8 @@
    </ol>
 
 Photo Dashboard Terbaru :
-  <img src="assets/item/bengkel-v2.PNG" style="width:100%; display:blcock;" alt="Dashboard Admin">
+  <img src="assets/item/bengkel-v2.PNG" style="width:100%; display:block;" alt="Dashboard Admin">
 Photo Data Barang :
-<img src="assets/item/Data-Barang.PNG" style="width:100%; display:blcock;" alt="Dashboard Admin">
+  <img src="assets/item/Data-Barang.PNG" style="width:100%; display:block;" alt="Dashboard Barang">
+Photo Data Kategori :
+  <img src="assets/item/Data-Kategori.PNG" style="width:100%; display:block;" alt="Dashboard Barang">
