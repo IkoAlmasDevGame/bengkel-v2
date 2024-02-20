@@ -35,4 +35,4 @@ Photo Data Barang :
 Photo Data Kategori :
   <img src="assets/item/Data-Kategori.PNG" style="width:100%; display:block;" alt="Dashboard Kategori">
 Photo Penjualan Kasir :
-  <img src="assets/item/Kasir.PNG" style="width:100%; display:block;" alt="Dashboard Kategori">
+  <img src="assets/item/Kasir.PNG" style="width:100%; display:block;" alt="Dashboard Kasir">
