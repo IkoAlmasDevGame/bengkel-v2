@@ -90,6 +90,11 @@
                 header("location:header.php?page=jual&nota=yes");
                 break;
 
+            /* Data Edit Pengguna*/
+            case 'edit-pengguna':
+                $model->EditPengguna();
+            break;
+
             default:
                 header("location:../dashboard/index.php");
                 break;

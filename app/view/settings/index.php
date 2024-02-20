@@ -40,7 +40,7 @@
                                     </h3>
                                 </div>
                                 <div class="card-body bg-light">
-                                    <form action="" method="post">
+                                    <form action="../ui/header.php?act=edit-account" method="post">
                                         <table class="table table-striped">
                                             <input type="hidden" name="id" value="<?=$_SESSION['id_pengguna']?>"
                                                 required>

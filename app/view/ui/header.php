@@ -44,6 +44,10 @@
             case 'reservasi-edit':
                 $model->ReservasiEdit();
                 break;
+                
+            case 'edit-account':
+                $model->EditAccount();
+                break;
             
             default:
                 require_once("../dashboard/index.php");

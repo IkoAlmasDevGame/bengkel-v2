@@ -380,5 +380,38 @@ class View {
         return $hasil;
     }
 
+    /* Edit data Pengguna dan Account */
+    public function EditPengguna(){
+        /*Table Start*/
+        $table = "db_pengguna";
+        /*Table Finish*/  
+        $id = htmlspecialchars($_POST['id']);
+        $email = htmlspecialchars($_POST["email"]);
+        $username = htmlspecialchars($_POST["username"]);
+        $password = htmlspecialchars($_POST["password"]);
+        $nama = htmlspecialchars($_POST["nama"]);
+        $user_level = htmlspecialchars($_POST["user_level"]);
+        $this->db->query("UPDATE $table SET username='$username', email='$email', password='$password', 
+        nama='$nama', user_level='$user_level' WHERE id='$id'");
+        header("location:../dashboard/index.php");
+    }
+
+    public function EditAccount(){
+        /*Table Start*/
+        $table = "db_account";
+        $table2 = "db_profile";
+        /*Table Finish*/  
+        $id = htmlspecialchars($_POST['id']);
+        $email = htmlspecialchars($_POST["email"]);
+        $username = htmlspecialchars($_POST["username"]);
+        $password = htmlspecialchars($_POST["password"]);
+        $nama = htmlspecialchars($_POST["nama"]);
+        $alamat = htmlspecialchars($_POST["alamat"]);
+        $tanggal = htmlspecialchars($_POST["tanggal_lahir"]);
+        $telepon = htmlspecialchars($_POST["telepon"]);
+        $this->db->query("UPDATE $table SET username='$username', email='$email', password='$password', nama='$nama', user_level='konsumen' WHERE id='$id'");
+        $this->db->query("UPDATE $table2 SET nama='$nama', alamat='$alamat', tanggal_lahir='$tanggal', telepon='$telepon' WHERE id='$id'");
+        header("location:../dashboard/index.php");
+    }
 }
 ?>
