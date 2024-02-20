@@ -33,4 +33,6 @@ Photo Dashboard Terbaru :
 Photo Data Barang :
   <img src="assets/item/Data-Barang.PNG" style="width:100%; display:block;" alt="Dashboard Barang">
 Photo Data Kategori :
-  <img src="assets/item/Data-Kategori.PNG" style="width:100%; display:block;" alt="Dashboard Barang">
+  <img src="assets/item/Data-Kategori.PNG" style="width:100%; display:block;" alt="Dashboard Kategori">
+Photo Penjualan Kasir :
+  <img src="assets/item/Kasir.PNG" style="width:100%; display:block;" alt="Dashboard Kategori">
