@@ -17,7 +17,7 @@
      <li>Laporan Keuangan & Laporan Reservasi</li>
      <li>Data Barang : Barang, & Kategori Barang</li>
      <li>Fitur print setiap data contoh : laporan keuangan, laporan reservasi, & barang</li>
-     <li>Settings : admin sistem informasi, edit account & log out</li>
+     <li>Settings : edit account & log out</li>
    </ol>
 
 3. Bengkel v2 ini harus ada Fitur di dashboard konsumen seperti :
